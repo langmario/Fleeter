@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Fleeter.Client.Views.AppShell"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             Background="White">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10 5" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" x:Name="menubar" VerticalAlignment="Stretch" Background="#EEE">
+            <Button>Kosten/Monat</Button>
+            <Button>Kosten/Geschäftsbereich</Button>
+            <Button>Fahrzeuge</Button>
+            <Button>Mitarbeiter</Button>
+            <Button>Geschäftsbereiche</Button>
+            <Button>Logout</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
