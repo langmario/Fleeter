@@ -2,14 +2,10 @@
 using Fleeter.Client.Controller;
 using Fleeter.Client.Controllers;
 using Fleeter.Client.Services;
-using Fleeter.Client.Views;
 using System.Windows;
 
 namespace Fleeter.Client
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
@@ -22,6 +18,7 @@ namespace Fleeter.Client
             builder.RegisterType<HomeController>().SingleInstance();
             builder.RegisterType<AdminUsersController>().SingleInstance();
             builder.RegisterType<AppBusinessUnitController>().SingleInstance();
+            builder.RegisterType<AppCostsPerMonthController>().SingleInstance();
 
             // Services
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();

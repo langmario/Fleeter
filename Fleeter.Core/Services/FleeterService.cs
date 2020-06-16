@@ -22,6 +22,7 @@ namespace Fleeter.Core.Services
 
         public BaseResult CreateOrUpdateBusinessUnit(BusinessUnit bu)
         {
+            bu.Name = bu.Name.Trim();
             if (bu.Id > 0) // Update
             {
                 try
@@ -53,6 +54,15 @@ namespace Fleeter.Core.Services
             {
                 try
                 {
+                    var saved = _businessUnits.FindByName(bu.Name);
+                    if (!(saved is null))
+                    {
+                        return new BaseResult
+                        {
+                            Status = Status.BadRequest,
+                            Message = "Es existiert bereits eine Abteilung mit diesem Namen"
+                        };
+                    }
                     _businessUnits.Create(bu);
                     return new BaseResult
                     {

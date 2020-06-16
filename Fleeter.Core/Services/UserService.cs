@@ -53,6 +53,7 @@ namespace Fleeter.Core.Services
 
         public LoginResult Login(string username, string password)
         {
+            username = username.Trim();
             var user = _repository.FindByUsername(username);
             if (user is null)
             {
@@ -80,9 +81,11 @@ namespace Fleeter.Core.Services
 
         public BaseResult CreateOrUpdate(User user)
         {
+            user.Username = user.Username.Trim();
+            user.Firstname = user.Firstname?.Trim();
+            user.Lastname = user.Lastname.Trim();
             try
             {
-
                 if (user.Id > 0) // Existing User
                 {
                     var found = _repository.FindById(user.Id);

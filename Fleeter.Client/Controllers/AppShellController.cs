@@ -17,13 +17,15 @@ namespace Fleeter.Client.Controller
         public AppShellController(IAuthenticationService authService,
                                   HomeController homeController,
                                   AdminUsersController adminUsersController,
-                                  AppBusinessUnitController businessUnitController)
+                                  AppBusinessUnitController businessUnitController,
+                                  AppCostsPerMonthController costsPerMonthController)
         {
             _authService = authService;
 
             _controllers.Add("home", homeController);
             _controllers.Add("businessUnits", businessUnitController);
             _controllers.Add("admin/users", adminUsersController);
+            _controllers.Add("costsPerMonth", costsPerMonthController);
         }
 
         public void Initialize(RootShellViewModel rootVM)

@@ -20,7 +20,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="30"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
 
