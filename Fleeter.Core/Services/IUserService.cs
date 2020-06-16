@@ -1,10 +1,7 @@
 ﻿using Fleeter.Core.Models;
-using System;
+using Fleeter.Core.Services.Results;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fleeter.Core.Services
 {
@@ -21,9 +18,9 @@ namespace Fleeter.Core.Services
         LoginResult Login(string username, string password);
 
         [OperationContract]
-        void SaveOrUpdate(User user);
+        BaseResult CreateOrUpdate(User user);
 
         [OperationContract]
-        void Delete(User user);
+        BaseResult Delete(User user);
     }
 }

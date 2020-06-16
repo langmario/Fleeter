@@ -28,6 +28,7 @@
     <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="dd5839d9-c9ce-41bb-860c-dd05407b5f1c" SourceId="1" SourceUrl="http://localhost:8080/users?wsdl" />
     <MetadataFile FileName="users2.xsd" MetadataType="Schema" ID="2205f62a-d567-45fc-a343-12a59193bce3" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd2" />
     <MetadataFile FileName="users.disco" MetadataType="Disco" ID="6674bf2c-1d06-412e-a7ca-4116b29f968a" SourceId="1" SourceUrl="http://localhost:8080/users?disco" />
+    <MetadataFile FileName="users4.xsd" MetadataType="Schema" ID="6d9dabad-4a96-4539-b4d3-9044a6c2eb98" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd4" />
     <MetadataFile FileName="users1.xsd" MetadataType="Schema" ID="99567d04-2539-4982-be84-3a8bf3d294d0" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd1" />
     <MetadataFile FileName="users3.xsd" MetadataType="Schema" ID="1d5e6530-2bcf-4282-8ad9-667bdfe21512" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd3" />
   </Metadata>

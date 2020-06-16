@@ -8,11 +8,13 @@ namespace Fleeter.Core.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> FindAll();
+        IList<T> FindAll();
 
         T FindById(int id);
 
-        void CreateOrUpdate(T entity);
+        void Create(T entity);
+
+        void Update(T entity);
 
         void Delete(T entity);
     }

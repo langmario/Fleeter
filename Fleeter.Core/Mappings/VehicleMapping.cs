@@ -9,7 +9,6 @@ namespace Fleeter.Core.Mappings
         {
             Table("Vehicles");
             Id(x => x.Id)
-                .Not.Nullable()
                 .GeneratedBy.Native();
             Map(x => x.LicensePlate)
                 .Length(50)
@@ -28,8 +27,12 @@ namespace Fleeter.Core.Mappings
                 .Not.Nullable();
             Map(x => x.LeasingRate)
                 .Not.Nullable();
-            Version(x => x.Version)
-                .Not.Nullable();
+
+            HasMany(x => x.EmployeeRelations)
+                .KeyColumn("VehicleId")
+                .Cascade.All();
+
+            Version(x => x.Version);
         }
     }
 }

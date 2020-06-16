@@ -8,20 +8,23 @@ namespace Fleeter.Core.Helper
 {
     public static class ContainerExtensions
     {
-        public static ContainerBuilder UseFleeter(this ContainerBuilder cb)
+        public static ContainerBuilder UseFleeter(this ContainerBuilder b)
         {
-            cb.RegisterType<Startup>().As<IHostedService>();
+            b.RegisterType<Startup>().As<IHostedService>();
+            b.RegisterType<ConnectionFactory>().As<IConnectionFactory>().SingleInstance().AutoActivate();
 
-            // Data
-            cb.RegisterType<ConnectionFactory>().As<IConnectionFactory>().SingleInstance().AutoActivate();
 
             // Services
-            cb.RegisterType<UserService>().As<IUserService>();
+            b.RegisterType<UserService>().As<IUserService>();
+            b.RegisterType<FleeterService>().As<IFleeterService>();
 
             // Repositories
-            cb.RegisterType<UserRepository>().As<IUserRepository>();
+            b.RegisterType<UserRepository>().As<IUserRepository>();
+            b.RegisterType<BusinessUnitRepository>().As<IBusinessUnitRepository>();
+            b.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
+            b.RegisterType<VehicleRepository>().As<IVehicleRepository>();
 
-            return cb;
+            return b;
         }
     }
 }

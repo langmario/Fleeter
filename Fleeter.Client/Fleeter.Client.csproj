@@ -71,6 +71,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\FleeterServiceProxy\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\UserServiceProxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,14 +84,19 @@
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\AppCostsPerMonthController.cs" />
     <Compile Include="Controllers\AppShellController.cs" />
+    <Compile Include="Controllers\AppBusinessUnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Controllers\RootShellController.cs" />
     <Compile Include="Converter\BooleanToCollapsedConverter.cs" />
+    <Compile Include="Converter\NullToCollapsedConverter.cs" />
+    <Compile Include="Converter\NullToVisibleConverter.cs" />
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\ViewModelBase.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\BusinessUnitService.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
+    <Compile Include="Services\IBusinessUnitService.cs" />
     <Compile Include="Services\IUsersService.cs" />
     <Compile Include="Services\UsersService.cs" />
     <Compile Include="ViewModels\AdminUsersViewModel.cs" />
@@ -192,6 +202,34 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.BaseResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.BusinessUnit.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.Employee.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.Vehicle.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\fleeter.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\fleeter1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\fleeter2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\fleeter3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\FleeterService.wsdl" />
+    <None Include="Connected Services\UserServiceProxy\Fleeter.Client.UserServiceProxy.BaseResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\UserServiceProxy\Fleeter.Client.UserServiceProxy.LoginResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -210,6 +248,9 @@
     <None Include="Connected Services\UserServiceProxy\users3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\UserServiceProxy\users4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\UserServiceProxy\UserService.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -224,6 +265,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\FleeterServiceProxy\" />
     <WCFMetadataStorage Include="Connected Services\UserServiceProxy\" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +279,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UserServiceProxy\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FleeterServiceProxy\fleeter.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FleeterServiceProxy\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FleeterServiceProxy\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FleeterServiceProxy\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

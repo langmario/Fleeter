@@ -18,6 +18,7 @@ namespace Fleeter.Core.Models
         [DataMember]
         public bool IsAdmin { get; set; }
 
+        [DataMember]
         public int Version { get; set; }
     }
 }

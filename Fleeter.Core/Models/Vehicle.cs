@@ -35,6 +35,8 @@ namespace Fleeter.Core.Models
         [DataMember]
         public decimal LeasingRate { get; set; }
 
+        public IList<VehicleToEmployee> EmployeeRelations { get; set; } = new List<VehicleToEmployee>();
+
         public int Version { get; set; }
     }
 }

@@ -17,8 +17,9 @@ namespace Fleeter.Core.Models
         [DataMember]
         public string Description { get; set; } = string.Empty;
 
-        public IEnumerable<Employee>? Employees;
+        public IList<Employee>? Employees;
 
+        [DataMember]
         public int Version { get; set; }
     }
 }

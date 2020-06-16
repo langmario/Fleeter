@@ -23,7 +23,7 @@ namespace Fleeter.Server
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Server stop ungracefully, for more informations take a look in console logs");
+                Console.WriteLine($"Error while starting server: {ex.Message}");
                 Console.ReadKey();
             }
         }

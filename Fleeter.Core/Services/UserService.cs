@@ -1,17 +1,18 @@
 ﻿using Fleeter.Core.Models;
 using Fleeter.Core.Repositories;
+using Fleeter.Core.Services.Results;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fleeter.Core.Services
 {
     [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
+        private static readonly string INIT_PASSWORD = "geheim";
+
+
         private readonly IUserRepository _repository;
 
         public UserService(IUserRepository repository)
@@ -27,12 +28,26 @@ namespace Fleeter.Core.Services
 
         public User GetById(int id)
         {
-            return _repository.FindById(id);
+            var user = _repository.FindById(id);
+            return user;
         }
 
-        public void Delete(User user)
+        public BaseResult Delete(User user)
         {
-            _repository.Delete(user);
+            var found = _repository.FindById(user.Id);
+            if (found is null)
+            {
+                return new BaseResult
+                {
+                    Status = Status.NotFound
+                };
+            }
+
+            _repository.Delete(found);
+            return new BaseResult
+            {
+                Status = Status.Deleted
+            };
         }
 
 
@@ -43,7 +58,6 @@ namespace Fleeter.Core.Services
             {
                 return new LoginResult
                 {
-                    Success = false,
                     Message = "Ungültige Anmeldedaten"
                 };
             }
@@ -60,14 +74,73 @@ namespace Fleeter.Core.Services
             return new LoginResult
             {
                 Success = true,
-                Message = null,
                 User = user
             };
         }
 
-        public void SaveOrUpdate(User user)
+        public BaseResult CreateOrUpdate(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                if (user.Id > 0) // Existing User
+                {
+                    var found = _repository.FindById(user.Id);
+                    if (found is null)
+                    {
+                        return new BaseResult
+                        {
+                            Status = Status.BadRequest,
+                            Message = "Nutzer mit Nutzernamen existiert bereits"
+                        };
+                    }
+
+                    if (string.IsNullOrEmpty(user.PasswordHash))
+                        user.PasswordHash = found.PasswordHash;
+
+                    _repository.Update(user);
+
+                    return new BaseResult
+                    {
+                        Status = Status.Updated
+                    };
+                }
+                else // New User
+                {
+                    var found = _repository.FindByUsername(user.Username);
+                    if (!(found is null))
+                    {
+                        return new BaseResult
+                        {
+                            Status = Status.BadRequest,
+                            Message = "Es existiert bereits ein Benutzer mit diesem Benutzernamen"
+                        };
+                    }
+                    user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(INIT_PASSWORD);
+                    _repository.Create(user);
+
+                    return new BaseResult
+                    {
+                        Status = Status.Created
+                    };
+                }
+            }
+            catch (NHibernate.StaleObjectStateException ex)
+            {
+                return new BaseResult
+                {
+                    Status = Status.Conflict,
+                    Message = "Beim Speichern ist ein Konflikt aufgetreten"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResult
+                {
+                    Status = Status.InternalServerError,
+                    Message = "Es ist ein Fehler aufgetreten: " + ex.Message
+                };
+            }
         }
     }
 }

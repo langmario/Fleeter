@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e92cdb97-b287-46d1-b226-8cc5d31410f0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/fleeter" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FleeterService.wsdl" MetadataType="Wsdl" ID="333cba8c-1eea-4aea-b77d-9b9780f8487e" SourceId="1" SourceUrl="http://localhost:8080/fleeter?wsdl" />
+    <MetadataFile FileName="fleeter.xsd" MetadataType="Schema" ID="50f62328-b2ac-4b82-8e32-b22df83d82ef" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd1" />
+    <MetadataFile FileName="fleeter2.xsd" MetadataType="Schema" ID="4352ee09-2764-4732-be33-22c6feaf4502" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd0" />
+    <MetadataFile FileName="fleeter3.xsd" MetadataType="Schema" ID="fe01da49-46e8-4753-b319-d5b0919e7666" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd3" />
+    <MetadataFile FileName="fleeter1.xsd" MetadataType="Schema" ID="268a13ac-a63a-4528-8427-ca7149c6fe02" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd2" />
+    <MetadataFile FileName="fleeter.disco" MetadataType="Disco" ID="ac1d1757-fc17-4598-ac60-9951216e5203" SourceId="1" SourceUrl="http://localhost:8080/fleeter?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -16,23 +16,31 @@ namespace Fleeter.Core.Repositories
         {
             _factory = factory;
         }
-        public virtual IEnumerable<T> FindAll()
+        public virtual IList<T> FindAll()
         {
             using var session = _factory.OpenSession();
-            return session.Query<T>();
+            return session.Query<T>().ToList();
         }
 
         public virtual T FindById(int id)
         {
             using var session = _factory.OpenSession();
-            return session.Query<T>().Where(e => e.Id == id).SingleOrDefault(null);
+            return session.Query<T>().FirstOrDefault(u => u.Id == id);
         }
 
-        public virtual void CreateOrUpdate(T entity)
+        public virtual void Create(T entity)
         {
             using var session = _factory.OpenSession();
             using var transaction = session.BeginTransaction();
             session.Save(entity);
+            transaction.Commit();
+        }
+
+        public virtual void Update(T entity)
+        {
+            using var session = _factory.OpenSession();
+            using var transaction = session.BeginTransaction();
+            session.Update(entity);
             transaction.Commit();
         }
 

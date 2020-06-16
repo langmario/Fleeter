@@ -25,10 +25,9 @@ namespace Fleeter.Core
             log = logger;
 
             var baseEndpoint = "http://localhost:8080/";
-            var binding = new WSHttpBinding();
-            var meta = new ServiceMetadataBehavior { HttpGetEnabled = true, HttpsGetEnabled = true };
 
-            AddUserService(baseEndpoint, binding, meta);
+            AddUserService(baseEndpoint);
+            AddFleeterService(baseEndpoint);
         }
 
 
@@ -52,20 +51,35 @@ namespace Fleeter.Core
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _services.ForEach(s => s.Close());
+            _lifetimeScope.Dispose();
             return Task.CompletedTask;
         }
 
 
-        private void AddUserService(string baseEndpoint, WSHttpBinding binding, ServiceMetadataBehavior meta)
+        private void AddUserService(string baseEndpoint)
         {
             var endpoint = new Uri(baseEndpoint + "users");
 
             var host = new ServiceHost(typeof(UserService), endpoint);
 
-            host.AddServiceEndpoint(typeof(IUserService), binding, "");
+            host.AddServiceEndpoint(typeof(IUserService), new WSHttpBinding(), "");
             host.AddDependencyInjectionBehavior<IUserService>(_lifetimeScope);
 
-            host.Description.Behaviors.Add(meta);
+            host.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true, HttpsGetEnabled = true });
+
+            _services.Add(host);
+        }
+
+        private void AddFleeterService(string baseEndpoint)
+        {
+            var endpoint = new Uri(baseEndpoint + "fleeter");
+
+            var host = new ServiceHost(typeof(FleeterService), endpoint);
+
+            host.AddServiceEndpoint(typeof(IFleeterService), new WSHttpBinding(), "");
+            host.AddDependencyInjectionBehavior<IFleeterService>(_lifetimeScope);
+
+            host.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true, HttpsGetEnabled = true });
 
             _services.Add(host);
         }

@@ -37,6 +37,9 @@ namespace Fleeter.Client.UserServiceProxy {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int VersionField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -108,6 +111,19 @@ namespace Fleeter.Client.UserServiceProxy {
                 if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
                     this.UsernameField = value;
                     this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Version {
+            get {
+                return this.VersionField;
+            }
+            set {
+                if ((this.VersionField.Equals(value) != true)) {
+                    this.VersionField = value;
+                    this.RaisePropertyChanged("Version");
                 }
             }
         }
@@ -199,6 +215,102 @@ namespace Fleeter.Client.UserServiceProxy {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BaseResult", Namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results")]
+    [System.SerializableAttribute()]
+    public partial class BaseResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Fleeter.Client.UserServiceProxy.Status StatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Fleeter.Client.UserServiceProxy.Status Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results")]
+    public enum Status : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ok = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Created = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Updated = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Deleted = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotFound = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BadRequest = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InvalidCredentials = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unauthorized = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Conflict = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InternalServerError = 9,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceProxy.IUserService")]
     public interface IUserService {
@@ -221,17 +333,17 @@ namespace Fleeter.Client.UserServiceProxy {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Login", ReplyAction="http://tempuri.org/IUserService/LoginResponse")]
         System.Threading.Tasks.Task<Fleeter.Client.UserServiceProxy.LoginResult> LoginAsync(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SaveOrUpdate", ReplyAction="http://tempuri.org/IUserService/SaveOrUpdateResponse")]
-        void SaveOrUpdate(Fleeter.Client.UserServiceProxy.User user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateOrUpdate", ReplyAction="http://tempuri.org/IUserService/CreateOrUpdateResponse")]
+        Fleeter.Client.UserServiceProxy.BaseResult CreateOrUpdate(Fleeter.Client.UserServiceProxy.User user);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SaveOrUpdate", ReplyAction="http://tempuri.org/IUserService/SaveOrUpdateResponse")]
-        System.Threading.Tasks.Task SaveOrUpdateAsync(Fleeter.Client.UserServiceProxy.User user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Delete", ReplyAction="http://tempuri.org/IUserService/DeleteResponse")]
-        void Delete(Fleeter.Client.UserServiceProxy.User user);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateOrUpdate", ReplyAction="http://tempuri.org/IUserService/CreateOrUpdateResponse")]
+        System.Threading.Tasks.Task<Fleeter.Client.UserServiceProxy.BaseResult> CreateOrUpdateAsync(Fleeter.Client.UserServiceProxy.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Delete", ReplyAction="http://tempuri.org/IUserService/DeleteResponse")]
-        System.Threading.Tasks.Task DeleteAsync(Fleeter.Client.UserServiceProxy.User user);
+        Fleeter.Client.UserServiceProxy.BaseResult Delete(Fleeter.Client.UserServiceProxy.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Delete", ReplyAction="http://tempuri.org/IUserService/DeleteResponse")]
+        System.Threading.Tasks.Task<Fleeter.Client.UserServiceProxy.BaseResult> DeleteAsync(Fleeter.Client.UserServiceProxy.User user);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -285,19 +397,19 @@ namespace Fleeter.Client.UserServiceProxy {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public void SaveOrUpdate(Fleeter.Client.UserServiceProxy.User user) {
-            base.Channel.SaveOrUpdate(user);
+        public Fleeter.Client.UserServiceProxy.BaseResult CreateOrUpdate(Fleeter.Client.UserServiceProxy.User user) {
+            return base.Channel.CreateOrUpdate(user);
         }
         
-        public System.Threading.Tasks.Task SaveOrUpdateAsync(Fleeter.Client.UserServiceProxy.User user) {
-            return base.Channel.SaveOrUpdateAsync(user);
+        public System.Threading.Tasks.Task<Fleeter.Client.UserServiceProxy.BaseResult> CreateOrUpdateAsync(Fleeter.Client.UserServiceProxy.User user) {
+            return base.Channel.CreateOrUpdateAsync(user);
         }
         
-        public void Delete(Fleeter.Client.UserServiceProxy.User user) {
-            base.Channel.Delete(user);
+        public Fleeter.Client.UserServiceProxy.BaseResult Delete(Fleeter.Client.UserServiceProxy.User user) {
+            return base.Channel.Delete(user);
         }
         
-        public System.Threading.Tasks.Task DeleteAsync(Fleeter.Client.UserServiceProxy.User user) {
+        public System.Threading.Tasks.Task<Fleeter.Client.UserServiceProxy.BaseResult> DeleteAsync(Fleeter.Client.UserServiceProxy.User user) {
             return base.Channel.DeleteAsync(user);
         }
     }

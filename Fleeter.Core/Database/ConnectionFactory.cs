@@ -21,9 +21,20 @@ namespace Fleeter.Core.Database
         {
             _factory = Fluently.Configure()
                 .Database(SQLiteConfiguration.Standard.UsingFile(@"FleetManagement.db"))
-                .Mappings(m => m.FluentMappings.Add<UserMapping>()
-                    .Conventions.Add(DefaultLazy.Never()))
+                .Mappings(AddMappings)
                 .BuildSessionFactory();
+        }
+
+        private void AddMappings(MappingConfiguration mappingConfiguration)
+        {
+            var m = mappingConfiguration.FluentMappings;
+            m.Add<UserMapping>();
+            m.Add<VehicleMapping>();
+            m.Add<EmployeeMapping>();
+            m.Add<BusinessUnitMapping>();
+            m.Add<VehicleToEmployeeMapping>();
+
+            m.Conventions.Add(DefaultLazy.Never());
         }
 
         public ISession OpenSession()

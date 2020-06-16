@@ -9,7 +9,6 @@ namespace Fleeter.Core.Mappings
         {
             Table("Employees");
             Id(x => x.Id)
-                .Not.Nullable()
                 .GeneratedBy.Native();
             Map(x => x.FirstName)
                 .Length(50)
@@ -25,9 +24,12 @@ namespace Fleeter.Core.Mappings
             Map(x => x.Title)
                 .Length(50)
                 .Not.Nullable();
+            References(x => x.BusinessUnit)
+                .Column("BusinessUnitId")
+                .Not.Nullable()
+                .Cascade.None();
 
-            Version(x => x.Version)
-                .Not.Nullable();
+            Version(x => x.Version);
         }
     }
 }

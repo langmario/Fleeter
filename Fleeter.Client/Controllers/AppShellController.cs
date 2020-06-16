@@ -11,16 +11,19 @@ namespace Fleeter.Client.Controller
     {
         private readonly AppShellViewModel _appVM = new AppShellViewModel();
         private readonly IAuthenticationService _authService;
-
-        private readonly Dictionary<string, ViewModelBase> _viewModels = new Dictionary<string, ViewModelBase>();
         private readonly Dictionary<string, IController> _controllers = new Dictionary<string, IController>();
 
-        public AppShellController(IAuthenticationService authService)
+
+        public AppShellController(IAuthenticationService authService,
+                                  HomeController homeController,
+                                  AdminUsersController adminUsersController,
+                                  AppBusinessUnitController businessUnitController)
         {
             _authService = authService;
-            RegisterViewModels();
 
-            _controllers.Add("home", new HomeController());
+            _controllers.Add("home", homeController);
+            _controllers.Add("businessUnits", businessUnitController);
+            _controllers.Add("admin/users", adminUsersController);
         }
 
         public void Initialize(RootShellViewModel rootVM)
@@ -29,18 +32,7 @@ namespace Fleeter.Client.Controller
             _appVM.ChangeView = new RelayCommand(ChangeLayoutExecute);
             _appVM.IsAdmin = _authService.IsAdmin;
             rootVM.ActiveViewModel = _appVM;
-            _appVM.ActiveViewModel = _viewModels["home"];
-        }
-
-        private void RegisterViewModels()
-        {
-            _viewModels.Add("home", new HomeViewModel());
-            _viewModels.Add("costsPerMonth", new AppCostsPerMonthViewModel());
-            _viewModels.Add("costsPerUnit", new AppCostsPerUnitViewModel());
-            _viewModels.Add("vehicles", new AppVehiclesViewModel());
-            _viewModels.Add("employees", new AppEmployeesViewModel());
-            _viewModels.Add("businessUnits", new AppBusinessUnitsViewModel());
-            _viewModels.Add("admin/users", new AdminUsersViewModel());
+            _appVM.ActiveViewModel = _controllers["home"].Initialize();
         }
 
 

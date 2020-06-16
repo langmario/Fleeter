@@ -210,7 +210,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IUserService_SaveOrUpdate_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IUserService_CreateOrUpdate_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -229,7 +229,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IUserService_SaveOrUpdate_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IUserService_CreateOrUpdate_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -292,6 +292,7 @@
       <xsd:import schemaLocation="http://localhost:8080/users?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8080/users?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" />
       <xsd:import schemaLocation="http://localhost:8080/users?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services" />
+      <xsd:import schemaLocation="http://localhost:8080/users?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_GetAll_InputMessage">
@@ -312,11 +313,11 @@
   <wsdl:message name="IUserService_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
-  <wsdl:message name="IUserService_SaveOrUpdate_InputMessage">
-    <wsdl:part name="parameters" element="tns:SaveOrUpdate" />
+  <wsdl:message name="IUserService_CreateOrUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdate" />
   </wsdl:message>
-  <wsdl:message name="IUserService_SaveOrUpdate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveOrUpdateResponse" />
+  <wsdl:message name="IUserService_CreateOrUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateResponse" />
   </wsdl:message>
   <wsdl:message name="IUserService_Delete_InputMessage">
     <wsdl:part name="parameters" element="tns:Delete" />
@@ -337,9 +338,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Login" message="tns:IUserService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginResponse" message="tns:IUserService_Login_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveOrUpdate">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/SaveOrUpdate" message="tns:IUserService_SaveOrUpdate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/SaveOrUpdateResponse" message="tns:IUserService_SaveOrUpdate_OutputMessage" />
+    <wsdl:operation name="CreateOrUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreateOrUpdate" message="tns:IUserService_CreateOrUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CreateOrUpdateResponse" message="tns:IUserService_CreateOrUpdate_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Delete">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Delete" message="tns:IUserService_Delete_InputMessage" />
@@ -382,14 +383,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveOrUpdate">
-      <soap12:operation soapAction="http://tempuri.org/IUserService/SaveOrUpdate" style="document" />
+    <wsdl:operation name="CreateOrUpdate">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/CreateOrUpdate" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IUserService_SaveOrUpdate_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IUserService_CreateOrUpdate_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IUserService_SaveOrUpdate_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IUserService_CreateOrUpdate_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

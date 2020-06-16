@@ -21,11 +21,7 @@ namespace Fleeter.Client.Services
             var users = new UserServiceClient();
             users.Open();
             var response = await users.LoginAsync(username, password);
-            if (response.Success)
-            {
-                _user = response.User;
-            }
-
+            _user = response.User;
             return response;
         }
 

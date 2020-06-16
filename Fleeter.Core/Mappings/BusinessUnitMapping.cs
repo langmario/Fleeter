@@ -9,7 +9,6 @@ namespace Fleeter.Core.Mappings
         {
             Table("BusinessUnits");
             Id(x => x.Id)
-                .Not.Nullable()
                 .GeneratedBy.Native();
             Map(x => x.Name)
                 .Length(100)

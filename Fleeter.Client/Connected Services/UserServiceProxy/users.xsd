@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8080/users?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" />
   <xs:import schemaLocation="http://localhost:8080/users?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services" />
+  <xs:import schemaLocation="http://localhost:8080/users?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" />
   <xs:element name="GetAll">
     <xs:complexType>
       <xs:sequence />
@@ -43,28 +44,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SaveOrUpdate">
+  <xs:element name="CreateOrUpdate">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="user" nillable="true" type="q4:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SaveOrUpdateResponse">
+  <xs:element name="CreateOrUpdateResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" minOccurs="0" name="CreateOrUpdateResult" nillable="true" type="q5:BaseResult" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Delete">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="user" nillable="true" type="q5:User" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="user" nillable="true" type="q6:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" minOccurs="0" name="DeleteResult" nillable="true" type="q7:BaseResult" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>
