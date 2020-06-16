@@ -2,14 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:Fleeter.Client.ViewModels"
+             xmlns:views="clr-namespace:Fleeter.Client.Views"
+             xmlns:helper="clr-namespace:Fleeter.Client.Converter"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
              Background="White">
     <UserControl.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="10 5" />
+            <Setter Property="Margin" Value="20 7" />
             <Setter Property="Padding" Value="10" />
         </Style>
+        <helper:BooleanToCollapsedConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -17,17 +21,63 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Grid Background="#eee">
+            <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontWeight="Black"
+                       FontSize="30">
+                Fleeter Inc.
+            </TextBlock>
+        </Grid>
+
         <StackPanel Grid.Row="1" x:Name="menubar" VerticalAlignment="Stretch" Background="#EEE">
-            <Button>Kosten/Monat</Button>
-            <Button>Kosten/Geschäftsbereich</Button>
-            <Button>Fahrzeuge</Button>
-            <Button>Mitarbeiter</Button>
-            <Button>Geschäftsbereiche</Button>
-            <Button>Logout</Button>
+            <Button Command="{Binding ChangeView}" CommandParameter="home">Start</Button>
+            <Button Command="{Binding ChangeView}" CommandParameter="costsPerMonth">Kosten/Monat</Button>
+            <Button Command="{Binding ChangeView}" CommandParameter="costsPerUnit">Kosten/Geschäftsbereich</Button>
+            <Button Command="{Binding ChangeView}" CommandParameter="vehicles">Fahrzeuge</Button>
+            <Button Command="{Binding ChangeView}" CommandParameter="employees">Mitarbeiter</Button>
+            <Button Command="{Binding ChangeView}" CommandParameter="businessUnits">Geschäftsbereiche</Button>
+
+            <Separator Margin="0 10"/>
+            <Button Command="{Binding ChangeView}" CommandParameter="admin/users" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}">Benutzer</Button>
+            
+            <Button Command="{Binding Logout}"
+                    Background="#bbb"
+            >
+                Logout
+            </Button>
         </StackPanel>
+
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10">
+            <ContentControl Content="{Binding ActiveViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+                        <views:HomeControl/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AdminUsersViewModel}">
+                        <views:AdminUsersControl/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AppCostsPerMonthViewModel}">
+                        <views:AppCostsPerMonthControl/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AppCostsPerUnitViewModel}">
+                        <views:AppCostsPerUnitControl/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AppVehiclesViewModel}">
+                        <views:AppVehiclesControl/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AppEmployeesViewModel}">
+                        <views:AppEmployeesControl/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AppBusinessUnitsViewModel}">
+                        <views:AppBusinessUnitsControl/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
     </Grid>
 </UserControl>

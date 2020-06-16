@@ -15,13 +15,17 @@ namespace Fleeter.Client
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<RootShellController>();
-            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
+            // Controller
+            builder.RegisterType<RootShellController>().SingleInstance();
+            builder.RegisterType<AppShellController>().SingleInstance();
+
+            // Services
+            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();
+            builder.RegisterType<UsersService>().As<IUsersService>();
 
             var container = builder.Build();
-
-            var controller = container.Resolve<RootShellController>();
-            controller.Initialize();
+            var rootController = container.Resolve<RootShellController>();
+            rootController.Initialize();
         }
     }
 }

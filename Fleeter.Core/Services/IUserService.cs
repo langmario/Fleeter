@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fleeter.Core.Services
 {
-    [ServiceContract()]
+    [ServiceContract]
     public interface IUserService
     {
         [OperationContract]
@@ -18,7 +18,7 @@ namespace Fleeter.Core.Services
         User GetById(int id);
 
         [OperationContract]
-        void Login(string username, string password);
+        LoginResult Login(string username, string password);
 
         [OperationContract]
         void SaveOrUpdate(User user);

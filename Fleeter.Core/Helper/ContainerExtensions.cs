@@ -1,12 +1,8 @@
 ﻿using Autofac;
 using Fleeter.Core.Database;
+using Fleeter.Core.Repositories;
 using Fleeter.Core.Services;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fleeter.Core.Helper
 {
@@ -17,10 +13,13 @@ namespace Fleeter.Core.Helper
             cb.RegisterType<Startup>().As<IHostedService>();
 
             // Data
-            cb.RegisterType<ConnectionFactory>().SingleInstance().AutoActivate();
+            cb.RegisterType<ConnectionFactory>().As<IConnectionFactory>().SingleInstance().AutoActivate();
 
             // Services
             cb.RegisterType<UserService>().As<IUserService>();
+
+            // Repositories
+            cb.RegisterType<UserRepository>().As<IUserRepository>();
 
             return cb;
         }

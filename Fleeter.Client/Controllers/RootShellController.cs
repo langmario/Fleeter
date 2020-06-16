@@ -1,9 +1,10 @@
-﻿using Fleeter.Client.Framework;
+﻿using Fleeter.Client.Controllers;
+using Fleeter.Client.Framework;
 using Fleeter.Client.Services;
+using Fleeter.Client.UserServiceProxy;
 using Fleeter.Client.ViewModels;
 using Fleeter.Client.Views;
 using System;
-using System.Windows;
 
 namespace Fleeter.Client.Controller
 {
@@ -12,14 +13,15 @@ namespace Fleeter.Client.Controller
         private readonly RootShell window = new RootShell();
         private readonly RootShellViewModel rootVM = new RootShellViewModel();
         private readonly LoginViewModel loginVM = new LoginViewModel();
-        private readonly AppShellViewModel appVM = new AppShellViewModel();
-
         private readonly IAuthenticationService _authService;
+        private readonly AppShellController _appController;
 
 
-        public RootShellController(IAuthenticationService authService)
+        public RootShellController(IAuthenticationService authService, AppShellController appController)
         {
             _authService = authService;
+            _appController = appController;
+            _authService.LogoutRequested += Logout;
         }
 
         public void Initialize()
@@ -30,7 +32,7 @@ namespace Fleeter.Client.Controller
 
         private void ShowLogin()
         {
-            loginVM.Login = new RelayCommand(LoginExecute, o => !string.IsNullOrEmpty(loginVM.Username) && !string.IsNullOrEmpty(loginVM.Password));
+            loginVM.Login = new RelayCommand(LoginExecute, o => !string.IsNullOrEmpty(loginVM.Username) && !string.IsNullOrEmpty(loginVM.Password) && !loginVM.IsLoading);
             loginVM.Username = "admin";
 
             rootVM.ActiveViewModel = loginVM;
@@ -40,16 +42,18 @@ namespace Fleeter.Client.Controller
 
         private async void LoginExecute(object o)
         {
+            loginVM.ErrorMessage = null;
             loginVM.IsLoading = true;
             try
             {
                 LoginResult result = await _authService.LoginAsync(loginVM.Username, loginVM.Password);
+                loginVM.Password = string.Empty;
                 if (result.Success)
                 {
-                    rootVM.ActiveViewModel = appVM;
-                } else
+                    _appController.Initialize(rootVM);
+                }
+                else
                 {
-                    loginVM.Password = string.Empty;
                     loginVM.ErrorMessage = result.Message;
                 }
             }
@@ -61,6 +65,11 @@ namespace Fleeter.Client.Controller
             {
                 loginVM.IsLoading = false;
             }
+        }
+
+        private void Logout(object sender, EventArgs e)
+        {
+            rootVM.ActiveViewModel = loginVM;
         }
     }
 }

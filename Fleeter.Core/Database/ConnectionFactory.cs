@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Fleeter.Core.Database
 {
-    public class ConnectionFactory
+    public class ConnectionFactory : IConnectionFactory
     {
         private readonly ISessionFactory _factory;
 

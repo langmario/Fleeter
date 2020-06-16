@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5c114c61-d6a1-4dc8-a5ce-d4ffb4c5f88d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/users" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="users.xsd" MetadataType="Schema" ID="8ae810dd-81f4-4f07-a888-40be6b4e2e9e" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd0" />
+    <MetadataFile FileName="UserService.wsdl" MetadataType="Wsdl" ID="dd5839d9-c9ce-41bb-860c-dd05407b5f1c" SourceId="1" SourceUrl="http://localhost:8080/users?wsdl" />
+    <MetadataFile FileName="users2.xsd" MetadataType="Schema" ID="2205f62a-d567-45fc-a343-12a59193bce3" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd2" />
+    <MetadataFile FileName="users.disco" MetadataType="Disco" ID="6674bf2c-1d06-412e-a7ca-4116b29f968a" SourceId="1" SourceUrl="http://localhost:8080/users?disco" />
+    <MetadataFile FileName="users1.xsd" MetadataType="Schema" ID="99567d04-2539-4982-be84-3a8bf3d294d0" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd1" />
+    <MetadataFile FileName="users3.xsd" MetadataType="Schema" ID="1d5e6530-2bcf-4282-8ad9-667bdfe21512" SourceId="1" SourceUrl="http://localhost:8080/users?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

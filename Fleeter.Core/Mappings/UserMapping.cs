@@ -9,7 +9,9 @@ namespace Fleeter.Core.Mappings
         {
 
             Table("Users");
-            Id(u => u.Id).GeneratedBy.Native();
+            Id(u => u.Id)
+                .Not.Nullable()
+                .GeneratedBy.Native();
             Map(u => u.Username)
                 .Not.Nullable().Length(20);
             Map(u => u.Firstname).Length(50);
@@ -20,7 +22,8 @@ namespace Fleeter.Core.Mappings
                 .Not.Nullable().Length(60);
             Map(u => u.IsAdmin)
                 .Not.Nullable();
-            Version(u => u.Version);
+            Version(u => u.Version)
+                .Not.Nullable();
 
         }
     }

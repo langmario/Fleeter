@@ -1,9 +1,10 @@
-﻿using System.Runtime.Serialization;
+﻿using Fleeter.Core.Database;
+using System.Runtime.Serialization;
 
 namespace Fleeter.Core.Models
 {
     [DataContract]
-    public class User
+    public class User : ISearchableEntity
     {
         [DataMember]
         public int Id { get; set; }
@@ -17,10 +18,6 @@ namespace Fleeter.Core.Models
         [DataMember]
         public bool IsAdmin { get; set; }
 
-        [DataMember]
         public int Version { get; set; }
-
-
-        public string FullName => Firstname is null ? Lastname : $"{Firstname} {Lastname}";
     }
 }
