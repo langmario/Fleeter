@@ -2,6 +2,7 @@
 using Fleeter.Core.Repositories;
 using Fleeter.Core.Services.Results;
 using NHibernate;
+using NHibernate.Exceptions;
 using System;
 using System.Collections.Generic;
 
@@ -82,7 +83,66 @@ namespace Fleeter.Core.Services
 
         public BaseResult CreateOrUpdateEmployee(Employee e)
         {
-            throw new NotImplementedException();
+            e.Firstname = e.Firstname.Trim();
+            e.Lastname = e.Lastname.Trim();
+            e.Title = e.Title.Trim();
+            e.Salutation = e.Salutation.Trim();
+
+            if (e.Id > 0) // Update
+            {
+                try
+                {
+                    _employees.Update(e);
+                    return new BaseResult
+                    {
+                        Status = Status.Updated
+                    };
+                }
+                catch (StaleObjectStateException ex)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.Conflict,
+                        Message = "Beim Speichern ist ein Konflikt aufgetreten"
+                    };
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.InternalServerError,
+                        Message = ex.Message
+                    };
+                }
+            }
+            else // Create
+            {
+                try
+                {
+                    var saved = _employees.FindByEmployeeNumber(e.EmployeeNumber);
+                    if (!(saved is null))
+                    {
+                        return new BaseResult
+                        {
+                            Status = Status.BadRequest,
+                            Message = "Es existiert bereits ein Mitarbeiter mit dieser Personalnummer"
+                        };
+                    }
+                    _employees.Create(e);
+                    return new BaseResult
+                    {
+                        Status = Status.Created
+                    };
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.InternalServerError,
+                        Message = ex.Message
+                    };
+                }
+            }
         }
 
         public BaseResult CreateOrUpdateVehicle(Vehicle v)
@@ -100,6 +160,14 @@ namespace Fleeter.Core.Services
                     Status = Status.Deleted
                 };
             }
+            catch (GenericADOException ex)
+            {
+                return new BaseResult
+                {
+                    Status = Status.Cascade,
+                    Message = "Geschäftsbereich kann nicht gelöscht werden, möglicherweise existieren noch verknüpfte Datensätze"
+                };
+            }
             catch (Exception ex)
             {
                 return new BaseResult
@@ -112,7 +180,22 @@ namespace Fleeter.Core.Services
 
         public BaseResult DeleteEmployee(Employee e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _employees.Delete(e);
+                return new BaseResult
+                {
+                    Status = Status.Deleted
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResult
+                {
+                    Status = Status.InternalServerError,
+                    Message = ex.Message
+                };
+            }
         }
 
         public BaseResult DeleteVehicle(Vehicle v)

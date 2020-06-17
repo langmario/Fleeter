@@ -50,7 +50,14 @@ namespace Fleeter.Core
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _services.ForEach(s => s.Close());
+            _services.ForEach(s =>
+            {
+                try
+                {
+                    s.Close();
+                }
+                catch (Exception) { }
+            });
             _lifetimeScope.Dispose();
             return Task.CompletedTask;
         }

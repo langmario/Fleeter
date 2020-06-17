@@ -10,10 +10,12 @@ namespace Fleeter.Core.Mappings
             Table("Employees");
             Id(x => x.Id)
                 .GeneratedBy.Native();
-            Map(x => x.FirstName)
+            Map(x => x.Firstname)
+                .Column("FirstName") // Keep column names consistent, either FirstName or Firstname, not both
                 .Length(50)
                 .Not.Nullable();
-            Map(x => x.LastName)
+            Map(x => x.Lastname)
+                .Column("LastName")
                 .Length(50)
                 .Not.Nullable();
             Map(x => x.EmployeeNumber)

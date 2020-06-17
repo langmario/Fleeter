@@ -18,5 +18,6 @@ namespace Fleeter.Core.Services.Results
         Unauthorized,
         Conflict,
         InternalServerError,
+        Cascade
     }
 }

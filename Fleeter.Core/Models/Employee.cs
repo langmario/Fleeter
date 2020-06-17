@@ -1,10 +1,6 @@
 ﻿using Fleeter.Core.Database;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fleeter.Core.Models
 {
@@ -15,10 +11,10 @@ namespace Fleeter.Core.Models
         public int Id { get; set; }
 
         [DataMember]
-        public string FirstName { get; set; } = string.Empty;
+        public string Firstname { get; set; } = string.Empty;
 
         [DataMember]
-        public string LastName { get; set; } = string.Empty;
+        public string Lastname { get; set; } = string.Empty;
 
         [DataMember]
         public int EmployeeNumber { get; set; }
@@ -34,6 +30,7 @@ namespace Fleeter.Core.Models
 
         public IList<VehicleToEmployee> Vehicles { get; set; } = new List<VehicleToEmployee>();
 
+        [DataMember]
         public int Version { get; set; }
 
     }

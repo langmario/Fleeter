@@ -3,10 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Fleeter.Client.Views"
+             xmlns:local="clr-namespace:Fleeter.Client.Views" xmlns:helper="clr-namespace:Fleeter.Client.Converter"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="600">
+    <UserControl.Resources>
+        <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
+        <helper:NullToVisibleConverter x:Key="NullToVisible"/>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Mitarbeiter</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="30"/>
+                <DataGridTextColumn Header="Personal-Nr." Binding="{Binding EmployeeNumber}" Width="100"/>
+                <DataGridTextColumn Header="Anrede" Binding="{Binding Salutation}" Width="0.5*"/>
+                <DataGridTextColumn Header="Titel" Binding="{Binding Title}" Width="0.5*"/>
+                <DataGridTextColumn Header="Vorname" Binding="{Binding Firstname}" Width="*"/>
+                <DataGridTextColumn Header="Nachname" Binding="{Binding Lastname}" Width="*"/>
+                <DataGridTextColumn Header="Bereich" Binding="{Binding BusinessUnit.Name}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Visibility="{Binding SelectedEmployee, Converter={StaticResource NullToVisible}}">
+            <Button Command="{Binding New}">Neu</Button>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Visibility="{Binding SelectedEmployee, Converter={StaticResource NullToCollapsed}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Margin="5">
+                <Label HorizontalAlignment="Center">Personalnummer</Label>
+                <TextBox Text="{Binding EmployeeNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="5">
+                <Label HorizontalAlignment="Center">Anrede</Label>
+                <TextBox Text="{Binding Salutation, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Margin="5">
+                <Label HorizontalAlignment="Center">Titel</Label>
+                <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Margin="5">
+                <Label HorizontalAlignment="Center">Vorname</Label>
+                <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
+                <Label HorizontalAlignment="Center">Nachname</Label>
+                <TextBox Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="1" Margin="5">
+                <Label HorizontalAlignment="Center">Geschäftsbereich</Label>
+                <ComboBox ItemsSource="{Binding BusinessUnits}" SelectedItem="{Binding BusinessUnit}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.ColumnSpan="4" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Padding="10" Margin="5" Command="{Binding CreateOrUpdate}">Speichern</Button>
+                <Button Padding="10" Margin="5" Command="{Binding Delete}">Löschen</Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

@@ -19,6 +19,7 @@
       <xs:enumeration value="Unauthorized" />
       <xs:enumeration value="Conflict" />
       <xs:enumeration value="InternalServerError" />
+      <xs:enumeration value="Cascade" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="Status" nillable="true" type="tns:Status" />

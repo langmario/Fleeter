@@ -200,6 +200,9 @@ namespace Fleeter.Client.FleeterServiceProxy {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         InternalServerError = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Cascade = 10,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -218,19 +221,22 @@ namespace Fleeter.Client.FleeterServiceProxy {
         private int EmployeeNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FirstNameField;
+        private string FirstnameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LastNameField;
+        private string LastnameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SalutationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int VersionField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -269,14 +275,14 @@ namespace Fleeter.Client.FleeterServiceProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FirstName {
+        public string Firstname {
             get {
-                return this.FirstNameField;
+                return this.FirstnameField;
             }
             set {
-                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
-                    this.FirstNameField = value;
-                    this.RaisePropertyChanged("FirstName");
+                if ((object.ReferenceEquals(this.FirstnameField, value) != true)) {
+                    this.FirstnameField = value;
+                    this.RaisePropertyChanged("Firstname");
                 }
             }
         }
@@ -295,14 +301,14 @@ namespace Fleeter.Client.FleeterServiceProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LastName {
+        public string Lastname {
             get {
-                return this.LastNameField;
+                return this.LastnameField;
             }
             set {
-                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
-                    this.LastNameField = value;
-                    this.RaisePropertyChanged("LastName");
+                if ((object.ReferenceEquals(this.LastnameField, value) != true)) {
+                    this.LastnameField = value;
+                    this.RaisePropertyChanged("Lastname");
                 }
             }
         }
@@ -329,6 +335,19 @@ namespace Fleeter.Client.FleeterServiceProxy {
                 if ((object.ReferenceEquals(this.TitleField, value) != true)) {
                     this.TitleField = value;
                     this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Version {
+            get {
+                return this.VersionField;
+            }
+            set {
+                if ((this.VersionField.Equals(value) != true)) {
+                    this.VersionField = value;
+                    this.RaisePropertyChanged("Version");
                 }
             }
         }

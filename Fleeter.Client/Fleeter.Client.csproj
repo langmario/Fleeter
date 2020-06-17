@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\AppCostsPerMonthController.cs" />
+    <Compile Include="Controllers\AppEmployeeController.cs" />
     <Compile Include="Controllers\AppShellController.cs" />
     <Compile Include="Controllers\AppBusinessUnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -93,10 +94,13 @@
     <Compile Include="Converter\NullToVisibleConverter.cs" />
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\ViewModelBase.cs" />
+    <Compile Include="Helper\BusinessUnit.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\BusinessUnitService.cs" />
+    <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IBusinessUnitService.cs" />
+    <Compile Include="Services\IEmployeeService.cs" />
     <Compile Include="Services\IUsersService.cs" />
     <Compile Include="Services\UsersService.cs" />
     <Compile Include="ViewModels\AdminUsersViewModel.cs" />
