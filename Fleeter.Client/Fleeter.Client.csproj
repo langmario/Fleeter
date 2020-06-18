@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
@@ -81,14 +84,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AddEmployeeRelationController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\AppCostsPerMonthController.cs" />
     <Compile Include="Controllers\AppEmployeeController.cs" />
     <Compile Include="Controllers\AppShellController.cs" />
     <Compile Include="Controllers\AppBusinessUnitController.cs" />
     <Compile Include="Controllers\AppVehicleController.cs" />
+    <Compile Include="Controllers\ChangePasswordDialogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IController.cs" />
+    <Compile Include="Controllers\IRoutableController.cs" />
     <Compile Include="Controllers\RootShellController.cs" />
     <Compile Include="Converter\BooleanToCollapsedConverter.cs" />
     <Compile Include="Converter\NullToCollapsedConverter.cs" />
@@ -103,7 +108,10 @@
     <Compile Include="Services\IBusinessUnitService.cs" />
     <Compile Include="Services\IEmployeeService.cs" />
     <Compile Include="Services\IUsersService.cs" />
+    <Compile Include="Services\IVehicleService.cs" />
     <Compile Include="Services\UsersService.cs" />
+    <Compile Include="Services\VehicleService.cs" />
+    <Compile Include="ViewModels\AddEmployeeRelationViewModel.cs" />
     <Compile Include="ViewModels\AdminUsersViewModel.cs" />
     <Compile Include="ViewModels\AppBusinessUnitsViewModel.cs" />
     <Compile Include="ViewModels\AppEmployeesViewModel.cs" />
@@ -111,9 +119,13 @@
     <Compile Include="ViewModels\AppCostsPerMonthViewModel.cs" />
     <Compile Include="ViewModels\AppCostsPerUnitViewModel.cs" />
     <Compile Include="ViewModels\AppVehiclesViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RootShellViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="Views\AddEmployeeRelationDialog.xaml.cs">
+      <DependentUpon>AddEmployeeRelationDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminUsersControl.xaml.cs">
       <DependentUpon>AdminUsersControl.xaml</DependentUpon>
     </Compile>
@@ -135,6 +147,9 @@
     <Compile Include="Views\AppVehiclesControl.xaml.cs">
       <DependentUpon>AppVehiclesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChangePasswordDialog.xaml.cs">
+      <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
@@ -148,6 +163,10 @@
     <Compile Include="Views\HomeControl.xaml.cs">
       <DependentUpon>HomeControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AddEmployeeRelationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminUsersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AppVehiclesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangePasswordDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,6 +325,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

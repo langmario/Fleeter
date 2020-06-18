@@ -3,7 +3,7 @@ using Fleeter.Client.ViewModels;
 
 namespace Fleeter.Client.Controllers
 {
-    public class AppCostsPerMonthController : IController
+    public class AppCostsPerMonthController : IRoutableController
     {
         private AppCostsPerMonthViewModel _vm;
 

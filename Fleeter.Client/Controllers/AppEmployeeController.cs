@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Fleeter.Client.Controllers
 {
-    public class AppEmployeeController : IController
+    public class AppEmployeeController : IRoutableController
     {
         private readonly IEmployeeService _employeeService;
         private readonly IBusinessUnitService _businessUnitsService;
@@ -72,7 +72,7 @@ namespace Fleeter.Client.Controllers
                 {
                     MessageBox.Show(ex.Message, "Fehler beim Löschen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            });
+            }, o => _vm.SelectedEmployee?.Id != 0);
 
             _vm.New = new RelayCommand(o =>
             {

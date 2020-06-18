@@ -2,7 +2,9 @@
 using Fleeter.Client.Framework;
 using Fleeter.Client.Services;
 using Fleeter.Client.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Media;
 using System.Windows;
 
 namespace Fleeter.Client.Controller
@@ -11,7 +13,7 @@ namespace Fleeter.Client.Controller
     {
         private readonly AppShellViewModel _appVM = new AppShellViewModel();
         private readonly IAuthenticationService _authService;
-        private readonly Dictionary<string, IController> _controllers = new Dictionary<string, IController>();
+        private readonly Dictionary<string, IRoutableController> _controllers = new Dictionary<string, IRoutableController>();
 
 
         public AppShellController(IAuthenticationService authService,

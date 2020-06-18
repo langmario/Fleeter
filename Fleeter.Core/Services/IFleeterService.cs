@@ -39,5 +39,13 @@ namespace Fleeter.Core.Services
 
         [OperationContract]
         BaseResult DeleteVehicle(Vehicle v);
+
+
+        // EMPLOYEE VEHICLE RELATIONS
+        [OperationContract]
+        BaseResult DeleteEmployeeRelation(VehicleToEmployeeRelation r);
+
+        [OperationContract]
+        BaseResult CreateEmployeeRelation(VehicleToEmployeeRelation r);
     }
 }

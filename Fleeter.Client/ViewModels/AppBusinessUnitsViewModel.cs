@@ -29,22 +29,22 @@ namespace Fleeter.Client.ViewModels
 
         public string Name
         {
-            get => SelectedBusinessUnit?.Name;
+            get => _selectedBusinessUnit?.Name;
             set
             {
-                if (SelectedBusinessUnit != null)
-                    SelectedBusinessUnit.Name = value;
+                if (_selectedBusinessUnit != null)
+                    _selectedBusinessUnit.Name = value;
                 RaisePropertyChanged();
             }
         }
 
         public string Description
         {
-            get => SelectedBusinessUnit?.Description;
+            get => _selectedBusinessUnit?.Description;
             set
             {
-                if (SelectedBusinessUnit != null)
-                    SelectedBusinessUnit.Description = value;
+                if (_selectedBusinessUnit != null)
+                    _selectedBusinessUnit.Description = value;
                 RaisePropertyChanged();
             }
         }

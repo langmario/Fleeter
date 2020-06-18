@@ -41,66 +41,66 @@ namespace Fleeter.Client.ViewModels
 
         public int? EmployeeNumber
         {
-            get => SelectedEmployee?.EmployeeNumber ?? null;
+            get => _selectedEmployee?.EmployeeNumber ?? null;
             set
             {
-                if (SelectedEmployee != null && value != null)
-                    SelectedEmployee.EmployeeNumber = (int)value;
+                if (_selectedEmployee != null && value != null)
+                    _selectedEmployee.EmployeeNumber = (int)value;
                 RaisePropertyChanged();
             }
         }
 
         public string Salutation
         {
-            get => SelectedEmployee?.Salutation;
+            get => _selectedEmployee?.Salutation;
             set
             {
-                if (SelectedEmployee != null)
-                    SelectedEmployee.Salutation = value;
+                if (_selectedEmployee != null)
+                    _selectedEmployee.Salutation = value;
                 RaisePropertyChanged();
             }
         }
 
         public string Title
         {
-            get => SelectedEmployee?.Title;
+            get => _selectedEmployee?.Title;
             set
             {
-                if (SelectedEmployee != null)
-                    SelectedEmployee.Title = value;
+                if (_selectedEmployee != null)
+                    _selectedEmployee.Title = value;
                 RaisePropertyChanged();
             }
         }
 
         public string Firstname
         {
-            get => SelectedEmployee?.Firstname;
+            get => _selectedEmployee?.Firstname;
             set
             {
-                if (SelectedEmployee != null)
-                    SelectedEmployee.Firstname = value;
+                if (_selectedEmployee != null)
+                    _selectedEmployee.Firstname = value;
                 RaisePropertyChanged();
             }
         }
 
         public string Lastname
         {
-            get => SelectedEmployee?.Lastname;
+            get => _selectedEmployee?.Lastname;
             set
             {
-                if (SelectedEmployee != null)
-                    SelectedEmployee.Lastname = value;
+                if (_selectedEmployee != null)
+                    _selectedEmployee.Lastname = value;
                 RaisePropertyChanged();
             }
         }
 
         public BusinessUnit BusinessUnit
         {
-            get => SelectedEmployee?.BusinessUnit;
+            get => _selectedEmployee?.BusinessUnit;
             set
             {
-                if (SelectedEmployee != null)
-                    SelectedEmployee.BusinessUnit = value;
+                if (_selectedEmployee != null)
+                    _selectedEmployee.BusinessUnit = value;
                 RaisePropertyChanged();
             }
         }

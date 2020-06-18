@@ -1,6 +1,7 @@
 ﻿using Fleeter.Core.Models;
 using Fleeter.Core.Repositories;
 using Fleeter.Core.Services.Results;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -128,7 +129,7 @@ namespace Fleeter.Core.Services
                     };
                 }
             }
-            catch (NHibernate.StaleObjectStateException ex)
+            catch (StaleObjectStateException ex)
             {
                 return new BaseResult
                 {
@@ -144,6 +145,36 @@ namespace Fleeter.Core.Services
                     Message = "Es ist ein Fehler aufgetreten: " + ex.Message
                 };
             }
+        }
+
+        public BaseResult ChangePassword(User u, string oldPassword, string newPassword)
+        {
+            var user = _repository.FindByUsername(u.Username);
+            if (user is null)
+            {
+                return new BaseResult
+                {
+                    Status = Status.BadRequest,
+                    Message = "Benutzer konnte nicht gefunden werden"
+                };
+            }
+
+            if (!BCrypt.Net.BCrypt.Verify(oldPassword, user.PasswordHash))
+            {
+                return new BaseResult
+                {
+                    Status = Status.BadRequest,
+                    Message = "Passwort falsch"
+                };
+            }
+
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+            _repository.Update(user);
+            return new BaseResult
+            {
+                Status = Status.Updated
+            };
         }
     }
 }

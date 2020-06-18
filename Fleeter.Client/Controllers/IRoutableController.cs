@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Fleeter.Client.Controllers
 {
-    public interface IController
+    public interface IRoutableController
     {
         ViewModelBase Initialize();
     }

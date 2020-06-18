@@ -1,10 +1,7 @@
 ﻿using Fleeter.Core.Database;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fleeter.Core.Models
 {
@@ -35,8 +32,10 @@ namespace Fleeter.Core.Models
         [DataMember]
         public decimal LeasingRate { get; set; }
 
-        public IList<VehicleToEmployee> EmployeeRelations { get; set; } = new List<VehicleToEmployee>();
+        [DataMember]
+        public IList<VehicleToEmployeeRelation>? EmployeeRelations { get; set; }
 
+        [DataMember]
         public int Version { get; set; }
     }
 }

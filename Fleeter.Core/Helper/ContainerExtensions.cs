@@ -23,6 +23,7 @@ namespace Fleeter.Core.Helper
             b.RegisterType<BusinessUnitRepository>().As<IBusinessUnitRepository>();
             b.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
             b.RegisterType<VehicleRepository>().As<IVehicleRepository>();
+            b.RegisterType<VehicleToEmployeeRelationRepository>().As<IVehicleToEmployeeRelationRepository>();
 
             return b;
         }

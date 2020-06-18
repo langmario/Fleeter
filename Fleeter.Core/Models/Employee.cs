@@ -28,8 +28,6 @@ namespace Fleeter.Core.Models
         [DataMember]
         public BusinessUnit BusinessUnit { get; set; } = null!;
 
-        public IList<VehicleToEmployee> Vehicles { get; set; } = new List<VehicleToEmployee>();
-
         [DataMember]
         public int Version { get; set; }
 

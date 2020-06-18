@@ -3,19 +3,22 @@ using FluentNHibernate.Mapping;
 
 namespace Fleeter.Core.Mappings
 {
-    public class VehicleToEmployeeMapping : ClassMap<VehicleToEmployee>
+    public class VehicleToEmployeeRelationMapping : ClassMap<VehicleToEmployeeRelation>
     {
-        public VehicleToEmployeeMapping()
+        public VehicleToEmployeeRelationMapping()
         {
             Table("VehicleToEmployeeRelation");
+
             Id(x => x.Id)
                 .GeneratedBy.Native();
+
             Map(x => x.StartDate)
                 .Not.Nullable();
+
             Map(x => x.EndDate);
 
-            References(x => x.Vehicle)
-                .Column("VehicleId")
+            References(x => x.Employee)
+                .Column("EmployeeId")
                 .Not.Nullable()
                 .Cascade.None();
         }

@@ -33,12 +33,12 @@ namespace Fleeter.Client.ViewModels
 
         public string Firstname
         {
-            get => SelectedUser?.Firstname;
+            get => _selectedUser?.Firstname;
             set
             {
-                if (SelectedUser != null)
+                if (_selectedUser != null)
                 {
-                    SelectedUser.Firstname = value;
+                    _selectedUser.Firstname = value;
                 }
 
                 RaisePropertyChanged();
@@ -47,12 +47,12 @@ namespace Fleeter.Client.ViewModels
 
         public string Lastname
         {
-            get => SelectedUser?.Lastname;
+            get => _selectedUser?.Lastname;
             set
             {
-                if (SelectedUser != null)
+                if (_selectedUser != null)
                 {
-                    SelectedUser.Lastname = value;
+                    _selectedUser.Lastname = value;
                 }
 
                 RaisePropertyChanged();
@@ -61,12 +61,12 @@ namespace Fleeter.Client.ViewModels
 
         public string Username
         {
-            get => SelectedUser?.Username;
+            get => _selectedUser?.Username;
             set
             {
-                if (SelectedUser != null)
+                if (_selectedUser != null)
                 {
-                    SelectedUser.Username = value;
+                    _selectedUser.Username = value;
                 }
 
                 RaisePropertyChanged();
@@ -75,12 +75,12 @@ namespace Fleeter.Client.ViewModels
 
         public bool IsAdmin
         {
-            get => SelectedUser?.IsAdmin ?? false;
+            get => _selectedUser?.IsAdmin ?? false;
             set
             {
-                if (SelectedUser != null)
+                if (_selectedUser != null)
                 {
-                    SelectedUser.IsAdmin = value;
+                    _selectedUser.IsAdmin = value;
                 }
 
                 RaisePropertyChanged();

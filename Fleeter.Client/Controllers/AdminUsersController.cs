@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace Fleeter.Client.Controllers
 {
-    public class AdminUsersController : IController
+    public class AdminUsersController : IRoutableController
     {
         private AdminUsersViewModel _vm;
         private readonly IUsersService _userService;

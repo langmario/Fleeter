@@ -32,7 +32,7 @@ namespace Fleeter.Core.Database
             m.Add<VehicleMapping>();
             m.Add<EmployeeMapping>();
             m.Add<BusinessUnitMapping>();
-            m.Add<VehicleToEmployeeMapping>();
+            m.Add<VehicleToEmployeeRelationMapping>();
 
             m.Conventions.Add(DefaultLazy.Never());
         }

@@ -11,6 +11,9 @@ namespace Fleeter.Client.Services
         event EventHandler LogoutRequested;
 
         Task<LoginResult> LoginAsync(string username, string password);
+
         void Logout();
+
+        Task<BaseResult> ChangePassword(string oldPassword, string newPassword);
     }
 }

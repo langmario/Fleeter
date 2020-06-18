@@ -5,20 +5,32 @@ using NHibernate;
 using NHibernate.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 
 namespace Fleeter.Core.Services
 {
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class FleeterService : IFleeterService
     {
         private readonly IBusinessUnitRepository _businessUnits;
         private readonly IEmployeeRepository _employees;
+        private readonly IVehicleToEmployeeRelationRepository _vehicleToEmployeeRelations;
         private readonly IVehicleRepository _vehicles;
 
-        public FleeterService(IBusinessUnitRepository businessUnits, IVehicleRepository vehicles, IEmployeeRepository employees)
+        public FleeterService(IBusinessUnitRepository businessUnits,
+                              IVehicleRepository vehicles,
+                              IEmployeeRepository employees,
+                              IVehicleToEmployeeRelationRepository vehicleToEmployeeRelations)
         {
             _businessUnits = businessUnits;
             _vehicles = vehicles;
             _employees = employees;
+            _vehicleToEmployeeRelations = vehicleToEmployeeRelations;
+        }
+
+        public BaseResult CreateEmployeeRelation(VehicleToEmployeeRelation r)
+        {
+            throw new NotImplementedException();
         }
 
         public BaseResult CreateOrUpdateBusinessUnit(BusinessUnit bu)
@@ -147,7 +159,61 @@ namespace Fleeter.Core.Services
 
         public BaseResult CreateOrUpdateVehicle(Vehicle v)
         {
-            throw new NotImplementedException();
+            if (v.Id > 0) // Update
+            {
+                try
+                {
+                    _vehicles.Update(v);
+                    return new BaseResult
+                    {
+                        Status = Status.Updated
+                    };
+                }
+                catch (StaleObjectStateException ex)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.Conflict,
+                        Message = "Beim Speichern ist ein Konflikt aufgetreten"
+                    };
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.InternalServerError,
+                        Message = ex.Message
+                    };
+                }
+            }
+            else // Save
+            {
+                try
+                {
+                    var saved = _vehicles.FindByLicensePlate(v.LicensePlate);
+                    if (!(saved is null))
+                    {
+                        return new BaseResult
+                        {
+                            Status = Status.BadRequest,
+                            Message = "Es existiert bereits ein Fahrzeug mit diesem Nummernschild"
+                        };
+                    }
+                    _vehicles.Create(v);
+                    return new BaseResult
+                    {
+                        Status = Status.Created
+                    };
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.InternalServerError,
+                        Message = ex.Message
+                    };
+                }
+            }
         }
 
         public BaseResult DeleteBusinessUnit(BusinessUnit bu)
@@ -198,9 +264,44 @@ namespace Fleeter.Core.Services
             }
         }
 
+        public BaseResult DeleteEmployeeRelation(VehicleToEmployeeRelation r)
+        {
+            try
+            {
+                _vehicleToEmployeeRelations.Delete(r);
+                return new BaseResult
+                {
+                    Status = Status.Deleted
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResult
+                {
+                    Status = Status.InternalServerError,
+                    Message = ex.Message
+                };
+            }
+        }
+
         public BaseResult DeleteVehicle(Vehicle v)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _vehicles.Delete(v);
+                return new BaseResult
+                {
+                    Status = Status.Deleted
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResult
+                {
+                    Status = Status.InternalServerError,
+                    Message = ex.Message
+                };
+            }
         }
 
         public IEnumerable<BusinessUnit> GetBusinessUnits()

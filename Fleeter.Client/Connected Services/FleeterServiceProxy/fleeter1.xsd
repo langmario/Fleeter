@@ -43,6 +43,7 @@
   <xs:complexType name="Vehicle">
     <xs:sequence>
       <xs:element minOccurs="0" name="Brand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmployeeRelations" nillable="true" type="tns:ArrayOfVehicleToEmployeeRelation" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Insurance" type="xs:decimal" />
       <xs:element minOccurs="0" name="LeasingFrom" type="xs:dateTime" />
@@ -50,7 +51,23 @@
       <xs:element minOccurs="0" name="LeasingTo" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LicensePlate" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Version" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Vehicle" nillable="true" type="tns:Vehicle" />
+  <xs:complexType name="ArrayOfVehicleToEmployeeRelation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VehicleToEmployeeRelation" nillable="true" type="tns:VehicleToEmployeeRelation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVehicleToEmployeeRelation" nillable="true" type="tns:ArrayOfVehicleToEmployeeRelation" />
+  <xs:complexType name="VehicleToEmployeeRelation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Employee" nillable="true" type="tns:Employee" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VehicleToEmployeeRelation" nillable="true" type="tns:VehicleToEmployeeRelation" />
 </xs:schema>

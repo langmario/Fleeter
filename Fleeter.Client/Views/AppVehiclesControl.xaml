@@ -3,12 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Fleeter.Client.Views" xmlns:helper="clr-namespace:Fleeter.Client.Converter"
+             xmlns:helper="clr-namespace:Fleeter.Client.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
         <helper:NullToVisibleConverter x:Key="NullToVisible"/>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -16,20 +20,30 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding Vehicles}"
+                  SelectedItem="{Binding SelectedVehicle}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Kennzeichen" Binding="{Binding }" MinWidth="100"/>
-                <DataGridTextColumn Header="Marke" Binding="{Binding }" Width="*"/>
-                <DataGridTextColumn Header="Modell" Binding="{Binding }" Width="*"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="30"/>
+                <DataGridTextColumn Header="Kennzeichen" Binding="{Binding LicensePlate}" MinWidth="100"/>
+                <DataGridTextColumn Header="Marke" Binding="{Binding Brand}" Width="*"/>
+                <DataGridTextColumn Header="Modell" Binding="{Binding Model}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Visibility="{Binding SelectedEmployee, Converter={StaticResource NullToVisible}}">
-            <Button Command="{Binding New}">Neu</Button>
+        <StackPanel VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="1"
+                    Visibility="{Binding SelectedVehicle, Converter={StaticResource NullToVisible}}">
+            <Button HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding New}">Neu</Button>
         </StackPanel>
 
 
-        <TabControl Grid.Row="2" Visibility="{Binding SelectedVehicle, Converter={StaticResource NullToCollapsed}}">
+        <TabControl Grid.Row="2" Visibility="{Binding SelectedVehicle, Converter={StaticResource NullToCollapsed}}" MinHeight="300">
             <TabItem Header="Allgemein">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -40,6 +54,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Column="0" Margin="5">
@@ -48,27 +63,75 @@
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="5">
                         <Label HorizontalAlignment="Center">Versicherung/Jahr</Label>
-                        <TextBox Text="{Binding Insurance, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding Insurance, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
                         <Label HorizontalAlignment="Center">Marke</Label>
-                        <TextBox Text="Porsche"/>
+                        <TextBox Text="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
                         <Label HorizontalAlignment="Center">Modell</Label>
-                        <TextBox Text="911 Turbo"/>
+                        <TextBox Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
-                    <StackPanel Grid.ColumnSpan="4" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Padding="10" Margin="5" Command="{Binding CreateOrUpdate}">Speichern</Button>
-                        <Button Padding="10" Margin="5" Command="{Binding Delete}">Löschen</Button>
-                        <Button Padding="10" Margin="5" Command="{Binding Cancel}">Abbrechen</Button>
+                    <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Leasing">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="5">
+                                <Label HorizontalAlignment="Center">Leasing-Start</Label>
+                                <DatePicker SelectedDate="{Binding LeasingFrom, UpdateSourceTrigger=PropertyChanged}"
+                                            IsTodayHighlighted="True"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="5">
+                                <Label HorizontalAlignment="Center">Leasing-Ende</Label>
+                                <DatePicker SelectedDate="{Binding LeasingTo, UpdateSourceTrigger=PropertyChanged}"
+                                            IsTodayHighlighted="True"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="5">
+                                <Label HorizontalAlignment="Center">Leasing-Rate</Label>
+                                <TextBox Text="{Binding LeasingRate, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+
+                    <StackPanel Grid.ColumnSpan="4" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Command="{Binding CreateOrUpdate}">Speichern</Button>
+                        <Button Command="{Binding Delete}">Löschen</Button>
+                        <Button Command="{Binding Cancel}">Abbrechen</Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Mitarbeiter">
-                <TextBlock>Mitarbeiter</TextBlock>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Command="{Binding NewRelation}">Neu</Button>
+                        <Button Command="{Binding DeleteRelation}">Löschen</Button>
+                    </StackPanel>
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding EmployeeRelations}"
+                              SelectedItem="{Binding SelectedEmployeeRelation}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              VerticalAlignment="Stretch"
+                              VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Von" Binding="{Binding StartDate, StringFormat=yyyy-MM-dd}" Width="*"/>
+                            <DataGridTextColumn Header="Bis" Binding="{Binding EndDate, StringFormat=yyyy-MM-dd}" Width="*"/>
+                            <DataGridTextColumn Header="Vorname" Binding="{Binding Employee.Firstname}" Width="2*"/>
+                            <DataGridTextColumn Header="Nachname" Binding="{Binding Employee.Lastname}" Width="2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

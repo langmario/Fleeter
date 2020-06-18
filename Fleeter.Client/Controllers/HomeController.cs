@@ -1,18 +1,26 @@
 ﻿using Fleeter.Client.Framework;
+using Fleeter.Client.Services;
 using Fleeter.Client.ViewModels;
 using System.Windows;
 
 namespace Fleeter.Client.Controllers
 {
-    public class HomeController : IController
+    public class HomeController : IRoutableController
     {
-        private readonly HomeViewModel _vm = new HomeViewModel();
+        private readonly ChangePasswordDialogController _changePasswordDialogController;
+        private HomeViewModel _vm;
 
-        public HomeController()
+        public HomeController(ChangePasswordDialogController changePasswordDialogController)
         {
-            _vm.ChangePassword = new RelayCommand(o => MessageBox.Show("Password Reset"));
+            _changePasswordDialogController = changePasswordDialogController;
         }
 
-        public ViewModelBase Initialize() => _vm;
+        public ViewModelBase Initialize()
+        {
+            _vm = new HomeViewModel();
+            _vm.ChangePassword = new RelayCommand(o => _changePasswordDialogController.ShowPasswordChangeDialog());
+
+            return _vm;
+        }
     }
 }

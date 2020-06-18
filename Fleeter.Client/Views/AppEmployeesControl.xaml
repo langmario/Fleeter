@@ -9,6 +9,10 @@
     <UserControl.Resources>
         <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
         <helper:NullToVisibleConverter x:Key="NullToVisible"/>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -16,10 +20,14 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding Employees}"
+                  SelectedItem="{Binding SelectedEmployee}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single">
             <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="30"/>-->
-                <DataGridTextColumn Header="Personal-Nr." SortDirection="Ascending" Binding="{Binding EmployeeNumber}" Width="100"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="30"/>
+                <DataGridTextColumn Header="Personal-Nr." Binding="{Binding EmployeeNumber}" Width="100"/>
                 <DataGridTextColumn Header="Anrede" Binding="{Binding Salutation}" Width="0.5*"/>
                 <DataGridTextColumn Header="Titel" Binding="{Binding Title}" Width="0.5*"/>
                 <DataGridTextColumn Header="Vorname" Binding="{Binding Firstname}" Width="*"/>
@@ -28,8 +36,13 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Visibility="{Binding SelectedEmployee, Converter={StaticResource NullToVisible}}">
-            <Button Command="{Binding New}">Neu</Button>
+        <StackPanel VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="1"
+                    Visibility="{Binding SelectedEmployee, Converter={StaticResource NullToVisible}}">
+            <Button HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding New}">Neu</Button>
         </StackPanel>
 
         <Grid Grid.Row="2" Visibility="{Binding SelectedEmployee, Converter={StaticResource NullToCollapsed}}">
@@ -41,7 +54,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Margin="5">
                 <Label HorizontalAlignment="Center">Personalnummer</Label>
@@ -65,19 +78,16 @@
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="1" Margin="5">
                 <Label HorizontalAlignment="Center">Geschäftsbereich</Label>
-                <ComboBox ItemsSource="{Binding BusinessUnits}" SelectedItem="{Binding BusinessUnit}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <ComboBox ItemsSource="{Binding BusinessUnits}" SelectedItem="{Binding BusinessUnit}" DisplayMemberPath="Name"></ComboBox>
             </StackPanel>
 
-            <StackPanel Grid.ColumnSpan="4" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Padding="10" Margin="5" Command="{Binding CreateOrUpdate}">Speichern</Button>
-                <Button Padding="10" Margin="5" Command="{Binding Delete}">Löschen</Button>
-                <Button Padding="10" Margin="5" Command="{Binding Cancel}">Abbrechen</Button>
+            <StackPanel Grid.ColumnSpan="4"
+                        Grid.Row="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Command="{Binding CreateOrUpdate}">Speichern</Button>
+                <Button Command="{Binding Delete}">Löschen</Button>
+                <Button Command="{Binding Cancel}">Abbrechen</Button>
             </StackPanel>
         </Grid>
     </Grid>

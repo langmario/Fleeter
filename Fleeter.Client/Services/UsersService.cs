@@ -6,11 +6,11 @@ namespace Fleeter.Client.Services
 {
     public class UsersService : IUsersService
     {
-        public async Task<List<User>> GetAll()
+        public Task<List<User>> GetAll()
         {
             var users = new UserServiceClient();
             users.Open();
-            return await users.GetAllAsync();
+            return users.GetAllAsync();
         }
 
         public async Task<BaseResult> CreateOrUpdate(User user)
@@ -20,11 +20,11 @@ namespace Fleeter.Client.Services
             return await users.CreateOrUpdateAsync(user);
         }
 
-        public async Task<BaseResult> Delete(User user)
+        public Task<BaseResult> Delete(User user)
         {
             var users = new UserServiceClient();
             users.Open();
-            return await users.DeleteAsync(user);
+            return users.DeleteAsync(user);
         }
     }
 }

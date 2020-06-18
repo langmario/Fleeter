@@ -375,6 +375,9 @@ namespace Fleeter.Client.FleeterServiceProxy {
         private string BrandField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation> EmployeeRelationsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -395,6 +398,9 @@ namespace Fleeter.Client.FleeterServiceProxy {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModelField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int VersionField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -414,6 +420,19 @@ namespace Fleeter.Client.FleeterServiceProxy {
                 if ((object.ReferenceEquals(this.BrandField, value) != true)) {
                     this.BrandField = value;
                     this.RaisePropertyChanged("Brand");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation> EmployeeRelations {
+            get {
+                return this.EmployeeRelationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeRelationsField, value) != true)) {
+                    this.EmployeeRelationsField = value;
+                    this.RaisePropertyChanged("EmployeeRelations");
                 }
             }
         }
@@ -509,6 +528,112 @@ namespace Fleeter.Client.FleeterServiceProxy {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Version {
+            get {
+                return this.VersionField;
+            }
+            set {
+                if ((this.VersionField.Equals(value) != true)) {
+                    this.VersionField = value;
+                    this.RaisePropertyChanged("Version");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VehicleToEmployeeRelation", Namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models")]
+    [System.SerializableAttribute()]
+    public partial class VehicleToEmployeeRelation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Fleeter.Client.FleeterServiceProxy.Employee EmployeeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> EndDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime StartDateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Fleeter.Client.FleeterServiceProxy.Employee Employee {
+            get {
+                return this.EmployeeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeField, value) != true)) {
+                    this.EmployeeField = value;
+                    this.RaisePropertyChanged("Employee");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> EndDate {
+            get {
+                return this.EndDateField;
+            }
+            set {
+                if ((this.EndDateField.Equals(value) != true)) {
+                    this.EndDateField = value;
+                    this.RaisePropertyChanged("EndDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime StartDate {
+            get {
+                return this.StartDateField;
+            }
+            set {
+                if ((this.StartDateField.Equals(value) != true)) {
+                    this.StartDateField = value;
+                    this.RaisePropertyChanged("StartDate");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -576,6 +701,18 @@ namespace Fleeter.Client.FleeterServiceProxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/DeleteVehicle", ReplyAction="http://tempuri.org/IFleeterService/DeleteVehicleResponse")]
         System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteVehicleAsync(Fleeter.Client.FleeterServiceProxy.Vehicle v);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/DeleteEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/DeleteEmployeeRelationResponse")]
+        Fleeter.Client.FleeterServiceProxy.BaseResult DeleteEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/DeleteEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/DeleteEmployeeRelationResponse")]
+        System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/CreateEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/CreateEmployeeRelationResponse")]
+        Fleeter.Client.FleeterServiceProxy.BaseResult CreateEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/CreateEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/CreateEmployeeRelationResponse")]
+        System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> CreateEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -675,6 +812,22 @@ namespace Fleeter.Client.FleeterServiceProxy {
         
         public System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteVehicleAsync(Fleeter.Client.FleeterServiceProxy.Vehicle v) {
             return base.Channel.DeleteVehicleAsync(v);
+        }
+        
+        public Fleeter.Client.FleeterServiceProxy.BaseResult DeleteEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.DeleteEmployeeRelation(r);
+        }
+        
+        public System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.DeleteEmployeeRelationAsync(r);
+        }
+        
+        public Fleeter.Client.FleeterServiceProxy.BaseResult CreateEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.CreateEmployeeRelation(r);
+        }
+        
+        public System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> CreateEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.CreateEmployeeRelationAsync(r);
         }
     }
 }

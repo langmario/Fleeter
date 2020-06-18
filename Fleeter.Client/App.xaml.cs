@@ -13,20 +13,23 @@ namespace Fleeter.Client
             var builder = new ContainerBuilder();
 
             // Controller
-            builder.RegisterType<RootShellController>().SingleInstance();
-            builder.RegisterType<AppShellController>().SingleInstance();
-            builder.RegisterType<HomeController>().SingleInstance();
-            builder.RegisterType<AdminUsersController>().SingleInstance();
-            builder.RegisterType<AppBusinessUnitController>().SingleInstance();
-            builder.RegisterType<AppCostsPerMonthController>().SingleInstance();
-            builder.RegisterType<AppEmployeeController>().SingleInstance();
-            builder.RegisterType<AppVehicleController>().SingleInstance();
+            builder.RegisterType<RootShellController>();
+            builder.RegisterType<AppShellController>();
+            builder.RegisterType<HomeController>();
+            builder.RegisterType<AdminUsersController>();
+            builder.RegisterType<AppBusinessUnitController>();
+            builder.RegisterType<AppCostsPerMonthController>();
+            builder.RegisterType<AppEmployeeController>();
+            builder.RegisterType<AppVehicleController>();
+            builder.RegisterType<ChangePasswordDialogController>();
+            builder.RegisterType<AddEmployeeRelationController>();
 
             // Services
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();
             builder.RegisterType<UsersService>().As<IUsersService>();
             builder.RegisterType<BusinessUnitService>().As<IBusinessUnitService>();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>();
+            builder.RegisterType<VehicleService>().As<IVehicleService>();
 
             var container = builder.Build();
             var rootController = container.Resolve<RootShellController>();

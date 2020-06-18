@@ -15,12 +15,15 @@ namespace Fleeter.Core.Services
         User GetById(int id);
 
         [OperationContract]
-        LoginResult Login(string username, string password);
-
-        [OperationContract]
         BaseResult CreateOrUpdate(User user);
 
         [OperationContract]
         BaseResult Delete(User user);
+
+        [OperationContract]
+        LoginResult Login(string username, string password);
+
+        [OperationContract]
+        BaseResult ChangePassword(User user, string oldPassword, string newPassword);
     }
 }

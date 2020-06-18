@@ -9,7 +9,7 @@
              mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
              Background="White">
     <UserControl.Resources>
-        <Style TargetType="Button">
+        <Style TargetType="Button" x:Key="MenuItem">
             <Setter Property="Margin" Value="20 7" />
             <Setter Property="Padding" Value="15" />
             <Setter Property="FontSize" Value="14" />
@@ -35,23 +35,38 @@
             </TextBlock>
         </Grid>
 
-        <StackPanel Grid.Row="1" x:Name="menubar" VerticalAlignment="Stretch" Background="#EEE">
-            <Button Command="{Binding ChangeView}" CommandParameter="home">Start</Button>
-            <Button Command="{Binding ChangeView}" CommandParameter="costsPerMonth">Kosten/Monat</Button>
-            <Button Command="{Binding ChangeView}" CommandParameter="costsPerUnit">Kosten/Geschäftsbereich</Button>
-            <Button Command="{Binding ChangeView}" CommandParameter="vehicles">Fahrzeuge</Button>
-            <Button Command="{Binding ChangeView}" CommandParameter="employees">Mitarbeiter</Button>
-            <Button Command="{Binding ChangeView}" CommandParameter="businessUnits">Geschäftsbereiche</Button>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel VerticalAlignment="Stretch" Background="#EEE">
+                <Button Command="{Binding ChangeView}"
+                        CommandParameter="home"
+                        Style="{StaticResource MenuItem}">Start</Button>
+                <Button Command="{Binding ChangeView}"
+                        CommandParameter="costsPerMonth"
+                        Style="{StaticResource MenuItem}">Kosten/Monat</Button>
+                <Button Command="{Binding ChangeView}"
+                        CommandParameter="costsPerUnit"
+                        Style="{StaticResource MenuItem}">Kosten/Geschäftsbereich</Button>
+                <Button Command="{Binding ChangeView}"
+                        CommandParameter="vehicles"
+                        Style="{StaticResource MenuItem}">Fahrzeuge</Button>
+                <Button Command="{Binding ChangeView}"
+                        CommandParameter="employees"
+                        Style="{StaticResource MenuItem}">Mitarbeiter</Button>
+                <Button Command="{Binding ChangeView}"
+                        CommandParameter="businessUnits"
+                        Style="{StaticResource MenuItem}">Geschäftsbereiche</Button>
 
-            <Separator Margin="0 10"/>
-            <Button Command="{Binding ChangeView}" CommandParameter="admin/users" Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVis}, FallbackValue=Collapsed}">Benutzer</Button>
-            
-            <Button Command="{Binding Logout}"
-                    Background="#bbb"
-            >
-                Logout
-            </Button>
-        </StackPanel>
+                <Separator Margin="0 10"/>
+                <Button Command="{Binding ChangeView}"
+                        CommandParameter="admin/users"
+                        Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVis}}"
+                        Style="{StaticResource MenuItem}">Benutzer</Button>
+
+                <Button Command="{Binding Logout}"
+                        Background="#bbb"
+                        Style="{StaticResource MenuItem}">Logout</Button>
+            </StackPanel>
+        </ScrollViewer>
 
         <Grid Grid.Row="1" Grid.Column="1" Margin="10">
             <ContentControl Content="{Binding ActiveViewModel}">

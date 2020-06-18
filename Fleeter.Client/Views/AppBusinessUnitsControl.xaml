@@ -9,6 +9,10 @@
     <UserControl.Resources>
         <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
         <helper:NullToVisibleConverter x:Key="NullToVisible"/>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -16,16 +20,25 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding BusinessUnits}" SelectedItem="{Binding SelectedBusinessUnit}" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding BusinessUnits}"
+                  SelectedItem="{Binding SelectedBusinessUnit}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single">
             <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="30"/>-->
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="30"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="2*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Visibility="{Binding SelectedBusinessUnit, Converter={StaticResource NullToVisible}}">
-            <Button Command="{Binding New}">Neu</Button>
+        <StackPanel VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="1"
+                    Visibility="{Binding SelectedBusinessUnit, Converter={StaticResource NullToVisible}}">
+            <Button VerticalAlignment="Stretch"
+                    HorizontalAlignment="Center"
+                    Command="{Binding New}">Neu</Button>
         </StackPanel>
 
         <Grid Grid.Row="2" Visibility="{Binding SelectedBusinessUnit, Converter={StaticResource NullToCollapsed}}">
@@ -35,7 +48,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Margin="5">
                 <Label HorizontalAlignment="Center">Name</Label>
@@ -46,10 +59,13 @@
                 <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
-            <StackPanel Grid.ColumnSpan="4" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Padding="10" Margin="5" Command="{Binding CreateOrUpdate}">Speichern</Button>
-                <Button Padding="10" Margin="5" Command="{Binding Delete}">Löschen</Button>
-                <Button Padding="10" Margin="5" Command="{Binding Cancel}">Abbrechen</Button>
+            <StackPanel Grid.ColumnSpan="4"
+                        Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Command="{Binding CreateOrUpdate}">Speichern</Button>
+                <Button Command="{Binding Delete}">Löschen</Button>
+                <Button Command="{Binding Cancel}">Abbrechen</Button>
             </StackPanel>
         </Grid>
     </Grid>

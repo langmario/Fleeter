@@ -18,33 +18,20 @@ namespace Fleeter.Core
         private readonly List<ServiceHost> _services = new List<ServiceHost>();
         private readonly ILifetimeScope _lifetimeScope;
         private readonly ILogger log;
+        private const string baseEndpoint = "http://localhost:8080/";
 
         public Startup(ILifetimeScope lifetimeScope, ILogger<Startup> logger)
         {
             _lifetimeScope = lifetimeScope;
             log = logger;
-
-            var baseEndpoint = "http://localhost:8080/";
-
-            AddUserService(baseEndpoint);
-            AddFleeterService(baseEndpoint);
         }
 
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _services.ForEach(s =>
-            {
-                try
-                {
-                    s.Open();
-                    log.LogInformation($"Started service {s.BaseAddresses.First()}");
-                }
-                catch (Exception ex)
-                {
-                    log.LogError($"Error while starting service {s.BaseAddresses.First()}");
-                }
-            });
+            AddUserService();
+            AddFleeterService();
+
             return Task.CompletedTask;
         }
 
@@ -52,18 +39,14 @@ namespace Fleeter.Core
         {
             _services.ForEach(s =>
             {
-                try
-                {
-                    s.Close();
-                }
-                catch (Exception) { }
+                s.Abort();
             });
-            _lifetimeScope.Dispose();
+
             return Task.CompletedTask;
         }
 
 
-        private void AddUserService(string baseEndpoint)
+        private void AddUserService()
         {
             var endpoint = new Uri(baseEndpoint + "users");
 
@@ -74,10 +57,20 @@ namespace Fleeter.Core
 
             host.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true, HttpsGetEnabled = true });
 
+            try
+            {
+                host.Open();
+                log.LogInformation($"Started UserService on {endpoint}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, $"Could not start UserService {endpoint}");
+            }
+
             _services.Add(host);
         }
 
-        private void AddFleeterService(string baseEndpoint)
+        private void AddFleeterService()
         {
             var endpoint = new Uri(baseEndpoint + "fleeter");
 
@@ -87,6 +80,16 @@ namespace Fleeter.Core
             host.AddDependencyInjectionBehavior<IFleeterService>(_lifetimeScope);
 
             host.Description.Behaviors.Add(new ServiceMetadataBehavior { HttpGetEnabled = true, HttpsGetEnabled = true });
+
+            try
+            {
+                host.Open();
+                log.LogInformation($"Started FleeterService on {endpoint}");
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, $"Could not start FleeterService {endpoint}");
+            }
 
             _services.Add(host);
         }
