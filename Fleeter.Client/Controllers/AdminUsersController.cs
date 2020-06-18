@@ -1,8 +1,8 @@
 ﻿using Fleeter.Client.Framework;
 using Fleeter.Client.Services;
+using Fleeter.Client.UserServiceProxy;
 using Fleeter.Client.ViewModels;
 using System.Collections.ObjectModel;
-using System.ServiceModel.Channels;
 using System.Windows;
 
 namespace Fleeter.Client.Controllers
@@ -26,7 +26,7 @@ namespace Fleeter.Client.Controllers
             _vm.CreateOrUpdate = new RelayCommand(async o =>
             {
                 var result = await _userService.CreateOrUpdate(_vm.SelectedUser);
-                if (!(result.Status == UserServiceProxy.Status.Created || result.Status == UserServiceProxy.Status.Updated))
+                if (!(result.Status == Status.Created || result.Status == Status.Updated))
                 {
                     MessageBox.Show(result.Message, "Fehler beim Erstellen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -41,7 +41,7 @@ namespace Fleeter.Client.Controllers
             _vm.Delete = new RelayCommand(async o =>
             {
                 var result = await _userService.Delete(_vm.SelectedUser);
-                if (result.Status != UserServiceProxy.Status.Deleted)
+                if (result.Status != Status.Deleted)
                 {
                     MessageBox.Show(result.Message, "Fehler beim Löschen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -51,7 +51,12 @@ namespace Fleeter.Client.Controllers
 
             _vm.New = new RelayCommand(o =>
             {
-                _vm.SelectedUser = new UserServiceProxy.User();
+                _vm.SelectedUser = new User();
+            });
+
+            _vm.Cancel = new RelayCommand(o =>
+            {
+                _vm.SelectedUser = null;
             });
 
 
@@ -63,7 +68,7 @@ namespace Fleeter.Client.Controllers
         private async void LoadUsers()
         {
             var users = await _userService.GetAll();
-            _vm.Users = new ObservableCollection<UserServiceProxy.User>(users);
+            _vm.Users = new ObservableCollection<User>(users);
         }
     }
 }

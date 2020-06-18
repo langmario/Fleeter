@@ -79,6 +79,11 @@ namespace Fleeter.Client.Controllers
                 _vm.SelectedEmployee = new Employee();
             });
 
+            _vm.Cancel = new RelayCommand(o =>
+            {
+                _vm.SelectedEmployee = null;
+            });
+
             LoadEmployees();
             LoadBusinessUnits();
 

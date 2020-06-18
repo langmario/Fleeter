@@ -19,13 +19,15 @@ namespace Fleeter.Client.Controller
                                   AdminUsersController adminUsersController,
                                   AppBusinessUnitController businessUnitController,
                                   AppCostsPerMonthController costsPerMonthController,
-                                  AppEmployeeController employeeController)
+                                  AppEmployeeController employeeController,
+                                  AppVehicleController vehicleController)
         {
             _authService = authService;
 
             _controllers.Add("home", homeController);
             _controllers.Add("costsPerMonth", costsPerMonthController);
             _controllers.Add("businessUnits", businessUnitController);
+            _controllers.Add("vehicles", vehicleController);
             _controllers.Add("employees", employeeController);
             _controllers.Add("admin/users", adminUsersController);
         }

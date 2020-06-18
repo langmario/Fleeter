@@ -86,6 +86,7 @@
     <Compile Include="Controllers\AppEmployeeController.cs" />
     <Compile Include="Controllers\AppShellController.cs" />
     <Compile Include="Controllers\AppBusinessUnitController.cs" />
+    <Compile Include="Controllers\AppVehicleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Controllers\RootShellController.cs" />

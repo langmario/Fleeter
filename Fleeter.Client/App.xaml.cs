@@ -20,6 +20,7 @@ namespace Fleeter.Client
             builder.RegisterType<AppBusinessUnitController>().SingleInstance();
             builder.RegisterType<AppCostsPerMonthController>().SingleInstance();
             builder.RegisterType<AppEmployeeController>().SingleInstance();
+            builder.RegisterType<AppVehicleController>().SingleInstance();
 
             // Services
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();

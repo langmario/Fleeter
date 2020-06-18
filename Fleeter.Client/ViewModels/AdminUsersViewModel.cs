@@ -1,11 +1,6 @@
 ﻿using Fleeter.Client.Framework;
 using Fleeter.Client.UserServiceProxy;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Fleeter.Client.ViewModels
@@ -15,8 +10,9 @@ namespace Fleeter.Client.ViewModels
         private ObservableCollection<User> _users = new ObservableCollection<User>();
         public ObservableCollection<User> Users { get => _users; set => Set(ref _users, value); }
 
-        private User _selectedUser = null;
-        public User SelectedUser {
+        private User _selectedUser;
+        public User SelectedUser
+        {
             get => _selectedUser;
             set
             {
@@ -32,44 +28,61 @@ namespace Fleeter.Client.ViewModels
         public ICommand CreateOrUpdate { get; set; }
         public ICommand Delete { get; set; }
         public ICommand New { get; set; }
+        public ICommand Cancel { get; set; }
 
 
         public string Firstname
         {
-            get => _selectedUser?.Firstname;
+            get => SelectedUser?.Firstname;
             set
             {
-                _selectedUser.Firstname = value;
+                if (SelectedUser != null)
+                {
+                    SelectedUser.Firstname = value;
+                }
+
                 RaisePropertyChanged();
             }
         }
 
         public string Lastname
         {
-            get => _selectedUser?.Lastname;
+            get => SelectedUser?.Lastname;
             set
             {
-                _selectedUser.Lastname = value;
+                if (SelectedUser != null)
+                {
+                    SelectedUser.Lastname = value;
+                }
+
                 RaisePropertyChanged();
             }
         }
 
         public string Username
         {
-            get => _selectedUser?.Username;
+            get => SelectedUser?.Username;
             set
             {
-                _selectedUser.Username = value;
+                if (SelectedUser != null)
+                {
+                    SelectedUser.Username = value;
+                }
+
                 RaisePropertyChanged();
             }
         }
 
         public bool IsAdmin
         {
-            get => _selectedUser?.IsAdmin ?? false;
+            get => SelectedUser?.IsAdmin ?? false;
             set
             {
-                _selectedUser.IsAdmin = value;
+                if (SelectedUser != null)
+                {
+                    SelectedUser.IsAdmin = value;
+                }
+
                 RaisePropertyChanged();
             }
         }

@@ -32,7 +32,8 @@ namespace Fleeter.Client.ViewModels
             get => SelectedBusinessUnit?.Name;
             set
             {
-                SelectedBusinessUnit.Name = value;
+                if (SelectedBusinessUnit != null)
+                    SelectedBusinessUnit.Name = value;
                 RaisePropertyChanged();
             }
         }
@@ -42,7 +43,8 @@ namespace Fleeter.Client.ViewModels
             get => SelectedBusinessUnit?.Description;
             set
             {
-                SelectedBusinessUnit.Description = value;
+                if (SelectedBusinessUnit != null)
+                    SelectedBusinessUnit.Description = value;
                 RaisePropertyChanged();
             }
         }
@@ -51,5 +53,6 @@ namespace Fleeter.Client.ViewModels
         public ICommand CreateOrUpdate { get; set; }
         public ICommand Delete { get; set; }
         public ICommand New { get; set; }
+        public ICommand Cancel { get; set; }
     }
 }

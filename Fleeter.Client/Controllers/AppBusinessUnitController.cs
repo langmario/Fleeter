@@ -36,7 +36,8 @@ namespace Fleeter.Client.Controllers
                         _vm.SelectedBusinessUnit = null;
                         LoadBusinessUnits();
                     }
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Fehler beim Speichern", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -66,6 +67,11 @@ namespace Fleeter.Client.Controllers
             _vm.New = new RelayCommand(o =>
             {
                 _vm.SelectedBusinessUnit = new BusinessUnit();
+            });
+
+            _vm.Cancel = new RelayCommand(o =>
+            {
+                _vm.SelectedBusinessUnit = null;
             });
 
             LoadBusinessUnits();

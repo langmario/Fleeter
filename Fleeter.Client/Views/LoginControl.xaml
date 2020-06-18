@@ -8,10 +8,10 @@
              Background="#eee">
     <UserControl.Resources>
         <Style TargetType="TextBox">
-            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Padding" Value="10 7"/>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Padding" Value="10"/>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center"/>
@@ -25,13 +25,13 @@
             <StackPanel Width="200">
                 <StackPanel Margin="0 10">
                     <TextBlock>Username</TextBlock>
-                    <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox TextAlignment="Center" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock>Password</TextBlock>
-                    <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox TextAlignment="Center" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                <Button Margin="0 10" Command="{Binding Login}">Login</Button>
+                <Button Margin="0 20 0 0" Command="{Binding Login}">Login</Button>
             </StackPanel>
             <TextBlock Text="{Binding ErrorMessage, Mode=TwoWay}" Foreground="Red"/>
         </StackPanel>

@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding BusinessUnits}" SelectedItem="{Binding SelectedBusinessUnit}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="30"/>
+                <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="30"/>-->
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="2*"/>
             </DataGrid.Columns>
@@ -49,6 +49,7 @@
             <StackPanel Grid.ColumnSpan="4" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Padding="10" Margin="5" Command="{Binding CreateOrUpdate}">Speichern</Button>
                 <Button Padding="10" Margin="5" Command="{Binding Delete}">Löschen</Button>
+                <Button Padding="10" Margin="5" Command="{Binding Cancel}">Abbrechen</Button>
             </StackPanel>
         </Grid>
     </Grid>

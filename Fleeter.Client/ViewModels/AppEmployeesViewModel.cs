@@ -109,5 +109,6 @@ namespace Fleeter.Client.ViewModels
         public ICommand CreateOrUpdate { get; set; }
         public ICommand Delete { get; set; }
         public ICommand New { get; set; }
+        public ICommand Cancel { get; set; }
     }
 }

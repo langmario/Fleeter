@@ -3,10 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Fleeter.Client.Views"
+             xmlns:local="clr-namespace:Fleeter.Client.Views" xmlns:helper="clr-namespace:Fleeter.Client.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
+        <helper:NullToVisibleConverter x:Key="NullToVisible"/>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Fahrzeuge</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Kennzeichen" Binding="{Binding }" MinWidth="100"/>
+                <DataGridTextColumn Header="Marke" Binding="{Binding }" Width="*"/>
+                <DataGridTextColumn Header="Modell" Binding="{Binding }" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Visibility="{Binding SelectedEmployee, Converter={StaticResource NullToVisible}}">
+            <Button Command="{Binding New}">Neu</Button>
+        </StackPanel>
+
+
+        <TabControl Grid.Row="2" Visibility="{Binding SelectedVehicle, Converter={StaticResource NullToCollapsed}}">
+            <TabItem Header="Allgemein">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="5">
+                        <Label HorizontalAlignment="Center">Kennzeichen</Label>
+                        <TextBox Text="{Binding LicensePlate, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="5">
+                        <Label HorizontalAlignment="Center">Versicherung/Jahr</Label>
+                        <TextBox Text="{Binding Insurance, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                        <Label HorizontalAlignment="Center">Marke</Label>
+                        <TextBox Text="Porsche"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+                        <Label HorizontalAlignment="Center">Modell</Label>
+                        <TextBox Text="911 Turbo"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.ColumnSpan="4" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Padding="10" Margin="5" Command="{Binding CreateOrUpdate}">Speichern</Button>
+                        <Button Padding="10" Margin="5" Command="{Binding Delete}">Löschen</Button>
+                        <Button Padding="10" Margin="5" Command="{Binding Cancel}">Abbrechen</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Mitarbeiter">
+                <TextBlock>Mitarbeiter</TextBlock>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

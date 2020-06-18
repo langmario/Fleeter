@@ -60,6 +60,7 @@
             <StackPanel Grid.ColumnSpan="4" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Padding="10" Margin="5" Command="{Binding CreateOrUpdate}">Speichern</Button>
                 <Button Padding="10" Margin="5" Command="{Binding Delete}">Löschen</Button>
+                <Button Padding="10" Margin="5" Command="{Binding Cancel}">Abbrechen</Button>
             </StackPanel>
         </Grid>
     </Grid>
