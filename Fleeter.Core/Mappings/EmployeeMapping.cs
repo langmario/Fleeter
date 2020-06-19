@@ -14,18 +14,21 @@ namespace Fleeter.Core.Mappings
                 .Column("FirstName") // Keep column names consistent, either FirstName or Firstname, not both
                 .Length(50)
                 .Not.Nullable();
+
             Map(x => x.Lastname)
                 .Column("LastName")
                 .Length(50)
                 .Not.Nullable();
+
             Map(x => x.EmployeeNumber)
                 .Not.Nullable();
+
             Map(x => x.Salutation)
-                .Length(50)
-                .Not.Nullable();
+                .Length(50);
+
             Map(x => x.Title)
-                .Length(50)
-                .Not.Nullable();
+                .Length(50);
+
             References(x => x.BusinessUnit)
                 .Column("BusinessUnitId")
                 .Not.Nullable()

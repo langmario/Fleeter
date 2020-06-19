@@ -2,6 +2,7 @@
 using Fleeter.Client.Services;
 using Fleeter.Client.ViewModels;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fleeter.Client.Controllers
@@ -16,7 +17,7 @@ namespace Fleeter.Client.Controllers
             _calcService = calcService;
         }
 
-        public ViewModelBase Initialize()
+        public async Task<ViewModelBase> Initialize()
         {
             _vm = new AppCostsPerMonthViewModel();
 
@@ -30,7 +31,7 @@ namespace Fleeter.Client.Controllers
             try
             {
                 var costs = await _calcService.GetCostsPerMonth();
-                _vm.CostsPerMonth = costs;
+                _vm.Costs = costs;
             }
             catch (Exception ex)
             {

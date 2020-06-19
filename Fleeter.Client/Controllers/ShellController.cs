@@ -5,50 +5,54 @@ using Fleeter.Client.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Media;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fleeter.Client.Controller
 {
-    public class AppShellController
+    public class ShellController : IRoutableController
     {
-        private readonly AppShellViewModel _appVM = new AppShellViewModel();
         private readonly IAuthenticationService _authService;
         private readonly Dictionary<string, IRoutableController> _controllers = new Dictionary<string, IRoutableController>();
+        private AppShellViewModel _appVM;
 
 
-        public AppShellController(IAuthenticationService authService,
-                                  HomeController homeController,
-                                  AdminUsersController adminUsersController,
-                                  AppBusinessUnitController businessUnitController,
-                                  AppCostsPerMonthController costsPerMonthController,
-                                  AppEmployeeController employeeController,
-                                  AppVehicleController vehicleController)
+        public ShellController(IAuthenticationService authService,
+                               HomeController homeController,
+                               AdminUsersController adminUsersController,
+                               AppBusinessUnitController businessUnitController,
+                               AppCostsPerMonthController costsPerMonthController,
+                               AppCostsPerBusinessUnitController costsPerUnitController,
+                               AppEmployeeController employeeController,
+                               AppVehicleController vehicleController)
         {
             _authService = authService;
 
             _controllers.Add("home", homeController);
             _controllers.Add("costsPerMonth", costsPerMonthController);
+            _controllers.Add("costsPerUnit", costsPerUnitController);
             _controllers.Add("businessUnits", businessUnitController);
             _controllers.Add("vehicles", vehicleController);
             _controllers.Add("employees", employeeController);
             _controllers.Add("admin/users", adminUsersController);
         }
 
-        public void Initialize(RootShellViewModel rootVM)
+        public async Task<ViewModelBase> Initialize()
         {
+            _appVM = new AppShellViewModel();
             _appVM.Logout = new RelayCommand(o => _authService.Logout());
             _appVM.ChangeView = new RelayCommand(ChangeLayoutExecute);
             _appVM.IsAdmin = _authService.IsAdmin;
-            rootVM.ActiveViewModel = _appVM;
-            _appVM.ActiveViewModel = _controllers["home"].Initialize();
+            _appVM.ActiveViewModel = await _controllers["home"].Initialize();
+            return _appVM;
         }
 
 
-        private void ChangeLayoutExecute(object param)
+        private async void ChangeLayoutExecute(object param)
         {
             if (param is string route && _controllers.TryGetValue(route, out var controller))
             {
-                _appVM.ActiveViewModel = controller.Initialize();
+                _appVM.ActiveViewModel = await controller.Initialize();
             }
             else
             {

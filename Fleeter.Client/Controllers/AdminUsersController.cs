@@ -4,6 +4,7 @@ using Fleeter.Client.UserServiceProxy;
 using Fleeter.Client.ViewModels;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fleeter.Client.Controllers
@@ -19,7 +20,7 @@ namespace Fleeter.Client.Controllers
         }
 
 
-        public ViewModelBase Initialize()
+        public async Task<ViewModelBase> Initialize()
         {
             _vm = new AdminUsersViewModel();
 

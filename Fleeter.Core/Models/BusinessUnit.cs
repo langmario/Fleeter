@@ -19,5 +19,10 @@ namespace Fleeter.Core.Models
 
         [DataMember]
         public int Version { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BusinessUnit b && b.Id == Id;
+        }
     }
 }

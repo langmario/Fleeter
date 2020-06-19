@@ -1,6 +1,7 @@
 ﻿using Fleeter.Client.Framework;
 using Fleeter.Client.Services;
 using Fleeter.Client.ViewModels;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fleeter.Client.Controllers
@@ -15,7 +16,7 @@ namespace Fleeter.Client.Controllers
             _changePasswordDialogController = changePasswordDialogController;
         }
 
-        public ViewModelBase Initialize()
+        public async Task<ViewModelBase> Initialize()
         {
             _vm = new HomeViewModel();
             _vm.ChangePassword = new RelayCommand(o => _changePasswordDialogController.ShowPasswordChangeDialog());

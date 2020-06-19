@@ -11,7 +11,7 @@ namespace Fleeter.Core.Helper
         public static ContainerBuilder UseFleeter(this ContainerBuilder b)
         {
             b.RegisterType<Startup>().As<IHostedService>();
-            b.RegisterType<ConnectionFactory>().As<IConnectionFactory>().SingleInstance().AutoActivate();
+            b.RegisterType<ConnectionFactory>().As<IConnectionFactory>().SingleInstance();
 
 
             // Services
@@ -23,7 +23,6 @@ namespace Fleeter.Core.Helper
             b.RegisterType<BusinessUnitRepository>().As<IBusinessUnitRepository>();
             b.RegisterType<EmployeeRepository>().As<IEmployeeRepository>();
             b.RegisterType<VehicleRepository>().As<IVehicleRepository>();
-            b.RegisterType<VehicleToEmployeeRelationRepository>().As<IVehicleToEmployeeRelationRepository>();
 
             return b;
         }

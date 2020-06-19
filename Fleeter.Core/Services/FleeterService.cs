@@ -15,18 +15,15 @@ namespace Fleeter.Core.Services
     {
         private readonly IBusinessUnitRepository _businessUnits;
         private readonly IEmployeeRepository _employees;
-        private readonly IVehicleToEmployeeRelationRepository _vehicleToEmployeeRelations;
         private readonly IVehicleRepository _vehicles;
 
         public FleeterService(IBusinessUnitRepository businessUnits,
                               IVehicleRepository vehicles,
-                              IEmployeeRepository employees,
-                              IVehicleToEmployeeRelationRepository vehicleToEmployeeRelations)
+                              IEmployeeRepository employees)
         {
             _businessUnits = businessUnits;
             _vehicles = vehicles;
             _employees = employees;
-            _vehicleToEmployeeRelations = vehicleToEmployeeRelations;
         }
 
         public BaseResult CreateEmployeeRelation(Vehicle v, VehicleToEmployeeRelation r)
@@ -81,7 +78,7 @@ namespace Fleeter.Core.Services
                     return new BaseResult
                     {
                         Status = Status.Conflict,
-                        Message = "Beim Speichern ist ein Konflikt aufgetreten"
+                        Message = "Beim Speichern ist ein Konflikt aufgetreten, laden sie die Daten neu"
                     };
                 }
                 catch (Exception ex)
@@ -125,10 +122,14 @@ namespace Fleeter.Core.Services
 
         public BaseResult CreateOrUpdateEmployee(Employee e)
         {
-            e.Firstname = e.Firstname.Trim();
-            e.Lastname = e.Lastname.Trim();
-            e.Title = e.Title.Trim();
-            e.Salutation = e.Salutation.Trim();
+            if (e.Firstname != null)
+                e.Firstname = e.Firstname.Trim();
+            if (e.Lastname != null)
+                e.Lastname = e.Lastname.Trim();
+            if (e.Title != null)
+                e.Title = e.Title.Trim();
+            if (e.Salutation != null)
+                e.Salutation = e.Salutation.Trim();
 
             if (e.Id > 0) // Update
             {
@@ -145,7 +146,7 @@ namespace Fleeter.Core.Services
                     return new BaseResult
                     {
                         Status = Status.Conflict,
-                        Message = "Beim Speichern ist ein Konflikt aufgetreten"
+                        Message = "Beim Speichern ist ein Konflikt aufgetreten, laden sie die Daten neu"
                     };
                 }
                 catch (Exception ex)
@@ -205,7 +206,7 @@ namespace Fleeter.Core.Services
                     return new BaseResult
                     {
                         Status = Status.Conflict,
-                        Message = "Beim Speichern ist ein Konflikt aufgetreten"
+                        Message = "Beim Speichern ist ein Konflikt aufgetreten, laden sie die Daten neu"
                     };
                 }
                 catch (Exception ex)
@@ -387,7 +388,15 @@ namespace Fleeter.Core.Services
 
         public Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>> GetCostsPerMonthPerBusinessUnit()
         {
-            throw new NotImplementedException();
+            var vehicles = _vehicles.FindAll();
+            var employees = _employees.FindAll();
+            var businessUnits = _businessUnits.FindAll();
+            var min = vehicles.Min(v => v.LeasingFrom);
+            var max = vehicles.Max(v => v.LeasingTo);
+
+            Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>> costsPerMonth = new Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>>();
+
+            return costsPerMonth;
         }
 
         public IEnumerable<Employee> GetEmployees()

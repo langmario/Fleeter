@@ -14,14 +14,14 @@ namespace Fleeter.Client.Controller
         private readonly RootShellViewModel rootVM = new RootShellViewModel();
         private readonly LoginViewModel loginVM = new LoginViewModel();
         private readonly IAuthenticationService _authService;
-        private readonly AppShellController _appController;
+        private readonly ShellController _appController;
 
 
-        public RootShellController(IAuthenticationService authService, AppShellController appController)
+        public RootShellController(IAuthenticationService authService, ShellController appController)
         {
             _authService = authService;
             _appController = appController;
-            _authService.LogoutRequested += Logout;
+            _authService.LogoutRequested += (o, e) => rootVM.ActiveViewModel = loginVM;
         }
 
         public void Initialize()
@@ -50,7 +50,7 @@ namespace Fleeter.Client.Controller
                 loginVM.Password = string.Empty;
                 if (result.Success)
                 {
-                    _appController.Initialize(rootVM);
+                    rootVM.ActiveViewModel = await _appController.Initialize();
                 }
                 else
                 {
@@ -65,11 +65,6 @@ namespace Fleeter.Client.Controller
             {
                 loginVM.IsLoading = false;
             }
-        }
-
-        private void Logout(object sender, EventArgs e)
-        {
-            rootVM.ActiveViewModel = loginVM;
         }
     }
 }

@@ -87,8 +87,9 @@
     <Compile Include="Controllers\AddEmployeeRelationController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\AppCostsPerMonthController.cs" />
+    <Compile Include="Controllers\AppCostsPerBusinessUnitController.cs" />
     <Compile Include="Controllers\AppEmployeeController.cs" />
-    <Compile Include="Controllers\AppShellController.cs" />
+    <Compile Include="Controllers\ShellController.cs" />
     <Compile Include="Controllers\AppBusinessUnitController.cs" />
     <Compile Include="Controllers\AppVehicleController.cs" />
     <Compile Include="Controllers\ChangePasswordDialogController.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Controllers\IRoutableController.cs" />
     <Compile Include="Controllers\RootShellController.cs" />
     <Compile Include="Converter\BooleanToCollapsedConverter.cs" />
+    <Compile Include="Converter\IntToBooleanConverter.cs" />
     <Compile Include="Converter\NullToCollapsedConverter.cs" />
     <Compile Include="Converter\NullToVisibleConverter.cs" />
     <Compile Include="Framework\RelayCommand.cs" />
@@ -119,7 +121,7 @@
     <Compile Include="ViewModels\AppEmployeesViewModel.cs" />
     <Compile Include="ViewModels\AppShellViewModel.cs" />
     <Compile Include="ViewModels\AppCostsPerMonthViewModel.cs" />
-    <Compile Include="ViewModels\AppCostsPerUnitViewModel.cs" />
+    <Compile Include="ViewModels\AppCostsPerBusinessUnitViewModel.cs" />
     <Compile Include="ViewModels\AppVehiclesViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

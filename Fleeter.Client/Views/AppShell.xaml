@@ -80,7 +80,7 @@
                     <DataTemplate DataType="{x:Type vm:AppCostsPerMonthViewModel}">
                         <views:AppCostsPerMonthControl/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type vm:AppCostsPerUnitViewModel}">
+                    <DataTemplate DataType="{x:Type vm:AppCostsPerBusinessUnitViewModel}">
                         <views:AppCostsPerUnitControl/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type vm:AppVehiclesViewModel}">

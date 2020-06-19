@@ -14,7 +14,7 @@ namespace Fleeter.Client
 
             // Controller
             builder.RegisterType<RootShellController>();
-            builder.RegisterType<AppShellController>();
+            builder.RegisterType<ShellController>();
             builder.RegisterType<HomeController>();
             builder.RegisterType<AdminUsersController>();
             builder.RegisterType<AppBusinessUnitController>();
@@ -23,6 +23,7 @@ namespace Fleeter.Client
             builder.RegisterType<AppVehicleController>();
             builder.RegisterType<ChangePasswordDialogController>();
             builder.RegisterType<AddEmployeeRelationController>();
+            builder.RegisterType<AppCostsPerBusinessUnitController>();
 
             // Services
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().SingleInstance();

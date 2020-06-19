@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fleeter.Client.Controllers
@@ -23,7 +24,7 @@ namespace Fleeter.Client.Controllers
             _addEmployeeRelationController = addEmployeeRelationController;
         }
 
-        public ViewModelBase Initialize()
+        public async Task<ViewModelBase> Initialize()
         {
             _vm = new AppVehiclesViewModel();
 
@@ -96,7 +97,7 @@ namespace Fleeter.Client.Controllers
                 {
                     LoadVehicles();
                 }
-            }, o => _vm.SelectedVehicle != null);
+            }, o => _vm.SelectedVehicle != null && _vm.SelectedVehicle?.Id > 0);
 
             _vm.DeleteRelation = new RelayCommand(async o =>
             {

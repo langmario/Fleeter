@@ -3,7 +3,11 @@ using Fleeter.Client.Framework;
 using Fleeter.Client.Services;
 using Fleeter.Client.ViewModels;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fleeter.Client.Controllers
@@ -21,7 +25,7 @@ namespace Fleeter.Client.Controllers
 
         private AppEmployeesViewModel _vm;
 
-        public ViewModelBase Initialize()
+        public async Task<ViewModelBase> Initialize()
         {
             _vm = new AppEmployeesViewModel();
 
@@ -43,7 +47,7 @@ namespace Fleeter.Client.Controllers
                         else
                         {
                             _vm.SelectedEmployee = null;
-                            LoadEmployees();
+                            _vm.Employees = await GetEmployees();
                         }
                     }
                     catch (Exception ex)
@@ -51,7 +55,7 @@ namespace Fleeter.Client.Controllers
                         MessageBox.Show(ex.Message, "Fehler beim Speichern", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-            });
+            }, o => _vm.Firstname != null && _vm.Lastname != null && _vm.EmployeeNumber >= 0 && _vm.BusinessUnit != null);
 
             _vm.Delete = new RelayCommand(async o =>
             {
@@ -65,7 +69,7 @@ namespace Fleeter.Client.Controllers
                     else
                     {
                         _vm.SelectedEmployee = null;
-                        LoadEmployees();
+                        _vm.Employees = await GetEmployees();
                     }
                 }
                 catch (Exception ex)
@@ -84,29 +88,38 @@ namespace Fleeter.Client.Controllers
                 _vm.SelectedEmployee = null;
             });
 
-            LoadEmployees();
-            LoadBusinessUnits();
+            _vm.Employees = await GetEmployees();
+            _vm.BusinessUnits = await GetBusinessUnits();
 
             return _vm;
         }
 
 
-        private async void LoadEmployees()
-        {
-            var employees = await _employeeService.GetAll();
-            _vm.Employees = new ObservableCollection<Employee>(employees);
-        }
-
-        private async void LoadBusinessUnits()
+        private async Task<ObservableCollection<Employee>> GetEmployees()
         {
             try
             {
-                var businessUnits = await _businessUnitsService.GetAll();
-                _vm.BusinessUnits = businessUnits;
+                var employees = await _employeeService.GetAll();
+                return new ObservableCollection<Employee>(employees);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Fehler beim Abrufen der Mitarbeiter" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return new ObservableCollection<Employee>();
+            }
+        }
+
+        private async Task<ObservableCollection<BusinessUnit>> GetBusinessUnits()
+        {
+            try
+            {
+                var businessUnits = await _businessUnitsService.GetAll();
+                return new ObservableCollection<BusinessUnit>(businessUnits);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Abrufen der Geschäftsbereiche" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return new ObservableCollection<BusinessUnit>();
             }
         }
     }

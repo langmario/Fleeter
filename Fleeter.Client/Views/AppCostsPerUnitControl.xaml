@@ -6,6 +6,36 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock>Costs Per Unit</TextBlock>
+        <DataGrid ItemsSource="{Binding Costs}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserResizeRows="False">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Monat"
+                                    Width="2*"
+                                    Binding="{Binding Key, StringFormat=yyyy MMMM}"/>
+                <DataGridTextColumn Header="Geschäftsbereich"
+                                    Width="*"
+                                    Binding="{Binding Value.Key}"/>
+                <DataGridTextColumn Header="# Fahrzeuge"
+                                    Width="0.5*"/>
+                <DataGridTextColumn Header="Kosten"
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

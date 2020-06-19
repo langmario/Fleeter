@@ -54,6 +54,13 @@ namespace Fleeter.Core.Services
 
         public LoginResult Login(string username, string password)
         {
+            if (username is null || password is null)
+            {
+                return new LoginResult
+                {
+                    Message = "Ungültige Anfrage, Benutzername und Passwort müssen vorhanden sein"
+                };
+            }
             username = username.Trim();
             var user = _repository.FindByUsername(username);
             if (user is null)

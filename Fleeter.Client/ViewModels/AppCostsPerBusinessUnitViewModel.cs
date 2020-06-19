@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace Fleeter.Client.ViewModels
 {
-    public class AppCostsPerMonthViewModel : ViewModelBase
+    public class AppCostsPerBusinessUnitViewModel : ViewModelBase
     {
-        private Dictionary<DateTime, MonthCostDetails> _costs;
-        public Dictionary<DateTime, MonthCostDetails> Costs
+        private Dictionary<(DateTime date, BusinessUnit bu), MonthCostDetails> _costs;
+        public Dictionary<(DateTime date, BusinessUnit bu), MonthCostDetails> Costs
         {
             get => _costs;
             set => Set(ref _costs, value);
         }
+
     }
 }

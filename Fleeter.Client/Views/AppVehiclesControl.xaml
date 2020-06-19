@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
         <helper:NullToVisibleConverter x:Key="NullToVisible"/>
+        <helper:IntToBooleanConverter x:Key="IntToBool"/>
         <Style TargetType="Button">
             <Setter Property="Padding" Value="10 5"/>
             <Setter Property="Margin" Value="5"/>
@@ -121,7 +122,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Mitarbeiter">
+            <TabItem Header="Mitarbeiter" IsEnabled="{Binding SelectedVehicle.Id, Converter={StaticResource IntToBool}}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
