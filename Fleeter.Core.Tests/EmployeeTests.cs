@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Fleeter.Core.Models;
+﻿using Fleeter.Core.Models;
 using Fleeter.Core.Repositories;
 using Fleeter.Core.Services;
 using Fleeter.Core.Services.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Linq;
 
 namespace Fleeter.Core.Tests
 {
@@ -16,7 +14,7 @@ namespace Fleeter.Core.Tests
         private static readonly Mock<IEmployeeRepository> _employeeRepositoryMock = new Mock<IEmployeeRepository>();
         private static IFleeterService _service;
 
-        private static Employee _employeeJohn = new Employee
+        private static readonly Employee _employeeJohn = new Employee
         {
             Id = 1,
             EmployeeNumber = 100,
@@ -24,7 +22,7 @@ namespace Fleeter.Core.Tests
             Lastname = "Joe",
             Version = 1
         };
-        private static Employee _employeeJane = new Employee
+        private static readonly Employee _employeeJane = new Employee
         {
             Id = 2,
             EmployeeNumber = 101,
@@ -32,7 +30,7 @@ namespace Fleeter.Core.Tests
             Lastname = "Joe",
             Version = 1
         };
-        private static Employee _employeeToSave = new Employee
+        private static readonly Employee _employeeToSave = new Employee
         {
             EmployeeNumber = 100,
             Firstname = "Test",

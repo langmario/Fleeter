@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using Fleeter.Core.Models;
+﻿using Fleeter.Core.Models;
 using Fleeter.Core.Repositories;
 using Fleeter.Core.Services;
 using Fleeter.Core.Services.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
+using System.Linq;
 
 namespace Fleeter.Core.Tests
 {
@@ -15,7 +15,7 @@ namespace Fleeter.Core.Tests
         private static readonly Mock<IVehicleRepository> _vehicleRepositoryMock = new Mock<IVehicleRepository>();
         private static IFleeterService _service;
 
-        private static Vehicle _vehicle1 = new Vehicle
+        private static readonly Vehicle _vehicle1 = new Vehicle
         {
             Id = 1,
             LicensePlate = "ABC-ABC-1000",
@@ -23,7 +23,7 @@ namespace Fleeter.Core.Tests
             Model = "911",
             Version = 1
         };
-        private static Vehicle _vehicle2 = new Vehicle
+        private static readonly Vehicle _vehicle2 = new Vehicle
         {
             Id = 2,
             LicensePlate = "ABC-ABC-1001",
@@ -31,13 +31,13 @@ namespace Fleeter.Core.Tests
             Model = "911",
             Version = 1
         };
-        private static Vehicle _invalidVehicleToSave = new Vehicle
+        private static readonly Vehicle _invalidVehicleToSave = new Vehicle
         {
             LicensePlate = "ABC-ABC-1000",
             Brand = "Porsche",
             Model = "911"
         };
-        private static Vehicle _validVehicleToSave = new Vehicle
+        private static readonly Vehicle _validVehicleToSave = new Vehicle
         {
             LicensePlate = "ABC-ABC-1002",
             Brand = "Porsche",
@@ -48,7 +48,7 @@ namespace Fleeter.Core.Tests
             LeasingRate = 100,
         };
 
-        private static VehicleToEmployeeRelation _relation = new VehicleToEmployeeRelation
+        private static readonly VehicleToEmployeeRelation _relation = new VehicleToEmployeeRelation
         {
             Employee = new Employee
             {

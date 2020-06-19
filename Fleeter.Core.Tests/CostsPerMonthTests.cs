@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Fleeter.Core.Models;
+﻿using Fleeter.Core.Models;
 using Fleeter.Core.Repositories;
 using Fleeter.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
+using System.Collections.Generic;
 
 namespace Fleeter.Core.Tests
 {

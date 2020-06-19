@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Fleeter.Core.Models;
+﻿using Fleeter.Core.Models;
 using Fleeter.Core.Repositories;
 using Fleeter.Core.Services;
 using Fleeter.Core.Services.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Linq;
 
 namespace Fleeter.Core.Tests
 {
@@ -16,19 +14,19 @@ namespace Fleeter.Core.Tests
         private static readonly Mock<IBusinessUnitRepository> _businessUnitRepositoryMock = new Mock<IBusinessUnitRepository>();
         private static IFleeterService _service;
 
-        private static BusinessUnit _buMarketing = new BusinessUnit
+        private static readonly BusinessUnit _buMarketing = new BusinessUnit
         {
             Id = 1,
             Name = "Marketing",
             Version = 1
         };
-        private static BusinessUnit _buResearch = new BusinessUnit
+        private static readonly BusinessUnit _buResearch = new BusinessUnit
         {
             Id = 2,
             Name = "Research",
             Version = 1
         };
-        private static BusinessUnit _buToSave = new BusinessUnit
+        private static readonly BusinessUnit _buToSave = new BusinessUnit
         {
             Name = "Marketing",
             Description = "this should fail"
