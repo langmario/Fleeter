@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" />
   <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" />
+  <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetBusinessUnits">
     <xs:complexType>
       <xs:sequence />
@@ -125,28 +126,54 @@
   <xs:element name="DeleteEmployeeRelation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="r" nillable="true" type="q16:VehicleToEmployeeRelation" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="v" nillable="true" type="q16:Vehicle" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="r" nillable="true" type="q17:VehicleToEmployeeRelation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteEmployeeRelationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" minOccurs="0" name="DeleteEmployeeRelationResult" nillable="true" type="q17:BaseResult" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" minOccurs="0" name="DeleteEmployeeRelationResult" nillable="true" type="q18:BaseResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateEmployeeRelation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="r" nillable="true" type="q18:VehicleToEmployeeRelation" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="v" nillable="true" type="q19:Vehicle" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="r" nillable="true" type="q20:VehicleToEmployeeRelation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateEmployeeRelationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" minOccurs="0" name="CreateEmployeeRelationResult" nillable="true" type="q19:BaseResult" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" minOccurs="0" name="CreateEmployeeRelationResult" nillable="true" type="q21:BaseResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCostsPerMonth">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCostsPerMonthResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetCostsPerMonthResult" nillable="true" type="q22:ArrayOfKeyValueOfdateTimeMonthCostDetailsfu0Mp_PEd" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCostsPerMonthPerBusinessUnit">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCostsPerMonthPerBusinessUnitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetCostsPerMonthPerBusinessUnitResult" nillable="true" type="q23:ArrayOfKeyValueOfdateTimeArrayOfKeyValueOfBusinessUnitMonthCostDetailsYgL_Pqi1Cty7Ep6D1" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -24,7 +24,6 @@ namespace Fleeter.Server
             catch (Exception ex)
             {
                 Console.WriteLine($"Error while starting server: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
             }
         }
     }

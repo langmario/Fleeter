@@ -30,6 +30,7 @@ namespace Fleeter.Client
             builder.RegisterType<BusinessUnitService>().As<IBusinessUnitService>();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>();
             builder.RegisterType<VehicleService>().As<IVehicleService>();
+            builder.RegisterType<CalculationService>().As<ICalculationService>();
 
             var container = builder.Build();
             var rootController = container.Resolve<RootShellController>();

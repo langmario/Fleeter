@@ -2,6 +2,7 @@
 using Fleeter.Client.Services;
 using Fleeter.Client.UserServiceProxy;
 using Fleeter.Client.ViewModels;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -67,8 +68,15 @@ namespace Fleeter.Client.Controllers
 
         private async void LoadUsers()
         {
-            var users = await _userService.GetAll();
-            _vm.Users = new ObservableCollection<User>(users);
+            try
+            {
+                var users = await _userService.GetAll();
+                _vm.Users = new ObservableCollection<User>(users);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Abrufen der Benutzer" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

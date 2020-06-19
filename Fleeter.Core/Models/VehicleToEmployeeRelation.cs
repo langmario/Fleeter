@@ -17,6 +17,13 @@ namespace Fleeter.Core.Models
         public DateTime? EndDate { get; set; }
 
         [DataMember]
-        public Employee Employee { get; set; } = null!;
+        public Employee? Employee { get; set; } = null!;
+
+        public Vehicle? Vehicle { get; set; } = null!;
+
+        public override bool Equals(object obj)
+        {
+            return obj is VehicleToEmployeeRelation r && r.Id == Id;
+        }
     }
 }

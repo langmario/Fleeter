@@ -30,6 +30,8 @@
     <MetadataFile FileName="fleeter3.xsd" MetadataType="Schema" ID="fe01da49-46e8-4753-b319-d5b0919e7666" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd3" />
     <MetadataFile FileName="fleeter1.xsd" MetadataType="Schema" ID="268a13ac-a63a-4528-8427-ca7149c6fe02" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd2" />
     <MetadataFile FileName="fleeter.disco" MetadataType="Disco" ID="ac1d1757-fc17-4598-ac60-9951216e5203" SourceId="1" SourceUrl="http://localhost:8080/fleeter?disco" />
+    <MetadataFile FileName="fleeter4.xsd" MetadataType="Schema" ID="4a026806-3b8c-459c-a6d6-fa6804f69295" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd5" />
+    <MetadataFile FileName="fleeter41.xsd" MetadataType="Schema" ID="773b843e-bba2-4910-9af0-054195726ec9" SourceId="1" SourceUrl="http://localhost:8080/fleeter?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

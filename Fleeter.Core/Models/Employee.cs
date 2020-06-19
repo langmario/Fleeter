@@ -28,6 +28,7 @@ namespace Fleeter.Core.Models
         [DataMember]
         public BusinessUnit BusinessUnit { get; set; } = null!;
 
+
         [DataMember]
         public int Version { get; set; }
 

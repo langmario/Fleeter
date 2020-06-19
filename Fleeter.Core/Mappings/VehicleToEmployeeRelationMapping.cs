@@ -21,6 +21,12 @@ namespace Fleeter.Core.Mappings
                 .Column("EmployeeId")
                 .Not.Nullable()
                 .Cascade.None();
+
+            References(x => x.Vehicle)
+                .Column("VehicleId")
+                .Not.Nullable()
+                .LazyLoad()
+                .Cascade.None();
         }
     }
 }

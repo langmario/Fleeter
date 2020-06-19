@@ -37,7 +37,8 @@ namespace Fleeter.Core.Mappings
 
             HasMany(x => x.EmployeeRelations)
                 .KeyColumn("VehicleId")
-                .Cascade.All();
+                .Inverse()
+                .Cascade.AllDeleteOrphan();
 
             Version(x => x.Version);
         }

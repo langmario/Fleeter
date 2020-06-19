@@ -77,7 +77,11 @@ namespace Fleeter.Client.Controllers
 
             _vm.New = new RelayCommand(o =>
             {
-                _vm.SelectedVehicle = new Vehicle();
+                _vm.SelectedVehicle = new Vehicle()
+                {
+                    LeasingFrom = DateTime.Today,
+                    LeasingTo = DateTime.Today.AddYears(4)
+                };
             });
 
             _vm.Cancel = new RelayCommand(o =>
@@ -87,15 +91,18 @@ namespace Fleeter.Client.Controllers
 
             _vm.NewRelation = new RelayCommand(async o =>
             {
-                _addEmployeeRelationController.ShowAddRelationDialog(_vm.SelectedVehicle);
-
+                var shouldReload = await _addEmployeeRelationController.ShowAddRelationDialog(_vm.SelectedVehicle);
+                if (shouldReload)
+                {
+                    LoadVehicles();
+                }
             }, o => _vm.SelectedVehicle != null);
 
             _vm.DeleteRelation = new RelayCommand(async o =>
             {
                 try
                 {
-                    var result = await _vehicleService.DeleteRelation(_vm.SelectedEmployeeRelation);
+                    var result = await _vehicleService.DeleteRelation(_vm.SelectedVehicle, _vm.SelectedEmployeeRelation);
                     if (result.Status != Status.Deleted)
                     {
                         MessageBox.Show(result.Message, "Fehler beim Löschen", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -116,11 +123,6 @@ namespace Fleeter.Client.Controllers
             return _vm;
         }
 
-
-        private bool IsValid(Vehicle v)
-        {
-            return IsValid(v, out var _);
-        }
 
         private bool IsValid(Vehicle v, out List<string> errors)
         {
@@ -158,8 +160,15 @@ namespace Fleeter.Client.Controllers
 
         private async void LoadVehicles()
         {
-            var vehicles = await _vehicleService.GetAll();
-            _vm.Vehicles = new ObservableCollection<Vehicle>(vehicles);
+            try
+            {
+                var vehicles = await _vehicleService.GetAll();
+                _vm.Vehicles = new ObservableCollection<Vehicle>(vehicles);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler beim Laden der Fahrzeuge");
+            }
         }
     }
 }

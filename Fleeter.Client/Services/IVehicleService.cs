@@ -12,8 +12,8 @@ namespace Fleeter.Client.Services
 
         Task<BaseResult> Delete(Vehicle v);
 
-        Task<BaseResult> AddRelation(VehicleToEmployeeRelation r);
+        Task<BaseResult> AddRelation(Vehicle v, VehicleToEmployeeRelation r);
 
-        Task<BaseResult> DeleteRelation(VehicleToEmployeeRelation r);
+        Task<BaseResult> DeleteRelation(Vehicle v, VehicleToEmployeeRelation r);
     }
 }

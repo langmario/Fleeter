@@ -103,9 +103,11 @@
     <Compile Include="Helper\BusinessUnit.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\BusinessUnitService.cs" />
+    <Compile Include="Services\CalculationService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\IBusinessUnitService.cs" />
+    <Compile Include="Services\ICalculationService.cs" />
     <Compile Include="Services\IEmployeeService.cs" />
     <Compile Include="Services\IUsersService.cs" />
     <Compile Include="Services\IVehicleService.cs" />
@@ -239,6 +241,9 @@
     <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.Employee.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.MonthCostDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.Vehicle.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -252,6 +257,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FleeterServiceProxy\fleeter3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\fleeter4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FleeterServiceProxy\fleeter41.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FleeterServiceProxy\FleeterService.wsdl" />

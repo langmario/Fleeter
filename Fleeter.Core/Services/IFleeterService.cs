@@ -1,5 +1,6 @@
 ﻿using Fleeter.Core.Models;
 using Fleeter.Core.Services.Results;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -43,9 +44,16 @@ namespace Fleeter.Core.Services
 
         // EMPLOYEE VEHICLE RELATIONS
         [OperationContract]
-        BaseResult DeleteEmployeeRelation(VehicleToEmployeeRelation r);
+        BaseResult DeleteEmployeeRelation(Vehicle v, VehicleToEmployeeRelation r);
 
         [OperationContract]
-        BaseResult CreateEmployeeRelation(VehicleToEmployeeRelation r);
+        BaseResult CreateEmployeeRelation(Vehicle v, VehicleToEmployeeRelation r);
+
+        // CALCULATIONS
+        [OperationContract]
+        Dictionary<DateTime, MonthCostDetails> GetCostsPerMonth();
+
+        [OperationContract]
+        Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>> GetCostsPerMonthPerBusinessUnit();
     }
 }

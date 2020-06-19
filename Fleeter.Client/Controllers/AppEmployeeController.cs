@@ -99,8 +99,15 @@ namespace Fleeter.Client.Controllers
 
         private async void LoadBusinessUnits()
         {
-            var businessUnits = await _businessUnitsService.GetAll();
-            _vm.BusinessUnits = businessUnits;
+            try
+            {
+                var businessUnits = await _businessUnitsService.GetAll();
+                _vm.BusinessUnits = businessUnits;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Abrufen der Mitarbeiter" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -28,18 +28,18 @@ namespace Fleeter.Client.Services
         }
 
 
-        public Task<BaseResult> AddRelation(VehicleToEmployeeRelation r)
+        public Task<BaseResult> AddRelation(Vehicle v, VehicleToEmployeeRelation r)
         {
             var fleeter = new FleeterServiceClient();
             fleeter.Open();
-            return fleeter.CreateEmployeeRelationAsync(r);
+            return fleeter.CreateEmployeeRelationAsync(v, r);
         }
 
-        public Task<BaseResult> DeleteRelation(VehicleToEmployeeRelation r)
+        public Task<BaseResult> DeleteRelation(Vehicle v, VehicleToEmployeeRelation r)
         {
             var fleeter = new FleeterServiceClient();
             fleeter.Open();
-            return fleeter.DeleteEmployeeRelationAsync(r);
+            return fleeter.DeleteEmployeeRelationAsync(v, r);
         }
     }
 }

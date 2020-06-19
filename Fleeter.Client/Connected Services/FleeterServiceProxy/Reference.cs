@@ -644,6 +644,67 @@ namespace Fleeter.Client.FleeterServiceProxy {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MonthCostDetails", Namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services")]
+    [System.SerializableAttribute()]
+    public partial class MonthCostDetails : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal CostsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CountField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Costs {
+            get {
+                return this.CostsField;
+            }
+            set {
+                if ((this.CostsField.Equals(value) != true)) {
+                    this.CostsField = value;
+                    this.RaisePropertyChanged("Costs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Count {
+            get {
+                return this.CountField;
+            }
+            set {
+                if ((this.CountField.Equals(value) != true)) {
+                    this.CountField = value;
+                    this.RaisePropertyChanged("Count");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FleeterServiceProxy.IFleeterService")]
     public interface IFleeterService {
@@ -703,16 +764,28 @@ namespace Fleeter.Client.FleeterServiceProxy {
         System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteVehicleAsync(Fleeter.Client.FleeterServiceProxy.Vehicle v);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/DeleteEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/DeleteEmployeeRelationResponse")]
-        Fleeter.Client.FleeterServiceProxy.BaseResult DeleteEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        Fleeter.Client.FleeterServiceProxy.BaseResult DeleteEmployeeRelation(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/DeleteEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/DeleteEmployeeRelationResponse")]
-        System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/CreateEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/CreateEmployeeRelationResponse")]
-        Fleeter.Client.FleeterServiceProxy.BaseResult CreateEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        Fleeter.Client.FleeterServiceProxy.BaseResult CreateEmployeeRelation(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/CreateEmployeeRelation", ReplyAction="http://tempuri.org/IFleeterService/CreateEmployeeRelationResponse")]
-        System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> CreateEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> CreateEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/GetCostsPerMonth", ReplyAction="http://tempuri.org/IFleeterService/GetCostsPerMonthResponse")]
+        System.Collections.Generic.Dictionary<System.DateTime, Fleeter.Client.FleeterServiceProxy.MonthCostDetails> GetCostsPerMonth();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/GetCostsPerMonth", ReplyAction="http://tempuri.org/IFleeterService/GetCostsPerMonthResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.DateTime, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>> GetCostsPerMonthAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnit", ReplyAction="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnitResponse")]
+        System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>> GetCostsPerMonthPerBusinessUnit();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnit", ReplyAction="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnitResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>>> GetCostsPerMonthPerBusinessUnitAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -814,20 +887,36 @@ namespace Fleeter.Client.FleeterServiceProxy {
             return base.Channel.DeleteVehicleAsync(v);
         }
         
-        public Fleeter.Client.FleeterServiceProxy.BaseResult DeleteEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
-            return base.Channel.DeleteEmployeeRelation(r);
+        public Fleeter.Client.FleeterServiceProxy.BaseResult DeleteEmployeeRelation(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.DeleteEmployeeRelation(v, r);
         }
         
-        public System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
-            return base.Channel.DeleteEmployeeRelationAsync(r);
+        public System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> DeleteEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.DeleteEmployeeRelationAsync(v, r);
         }
         
-        public Fleeter.Client.FleeterServiceProxy.BaseResult CreateEmployeeRelation(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
-            return base.Channel.CreateEmployeeRelation(r);
+        public Fleeter.Client.FleeterServiceProxy.BaseResult CreateEmployeeRelation(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.CreateEmployeeRelation(v, r);
         }
         
-        public System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> CreateEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
-            return base.Channel.CreateEmployeeRelationAsync(r);
+        public System.Threading.Tasks.Task<Fleeter.Client.FleeterServiceProxy.BaseResult> CreateEmployeeRelationAsync(Fleeter.Client.FleeterServiceProxy.Vehicle v, Fleeter.Client.FleeterServiceProxy.VehicleToEmployeeRelation r) {
+            return base.Channel.CreateEmployeeRelationAsync(v, r);
+        }
+        
+        public System.Collections.Generic.Dictionary<System.DateTime, Fleeter.Client.FleeterServiceProxy.MonthCostDetails> GetCostsPerMonth() {
+            return base.Channel.GetCostsPerMonth();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.DateTime, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>> GetCostsPerMonthAsync() {
+            return base.Channel.GetCostsPerMonthAsync();
+        }
+        
+        public System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>> GetCostsPerMonthPerBusinessUnit() {
+            return base.Channel.GetCostsPerMonthPerBusinessUnit();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>>> GetCostsPerMonthPerBusinessUnitAsync() {
+            return base.Channel.GetCostsPerMonthPerBusinessUnitAsync();
         }
     }
 }

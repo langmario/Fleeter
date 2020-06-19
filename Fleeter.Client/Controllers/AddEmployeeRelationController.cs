@@ -34,7 +34,7 @@ namespace Fleeter.Client.Controllers
             {
                 try
                 {
-                    var result = await _vehicleService.AddRelation(new VehicleToEmployeeRelation
+                    var result = await _vehicleService.AddRelation(v, new VehicleToEmployeeRelation
                     {
                         Employee = _vm.SelectedEmployee,
                         StartDate = _vm.From,

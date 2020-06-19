@@ -81,8 +81,15 @@ namespace Fleeter.Client.Controllers
 
         private async void LoadBusinessUnits()
         {
-            var businessUnits = await _businessUnits.GetAll();
-            _vm.BusinessUnits = new ObservableCollection<BusinessUnit>(businessUnits);
+            try
+            {
+                var businessUnits = await _businessUnits.GetAll();
+                _vm.BusinessUnits = new ObservableCollection<BusinessUnit>(businessUnits);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Abrufen der Geschäftsbereiche" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
