@@ -101,21 +101,25 @@ namespace Fleeter.Client.Controllers
 
             _vm.DeleteRelation = new RelayCommand(async o =>
             {
-                try
+                var mbResult = MessageBox.Show("Sind Sie sicher, dass Sie die Verknüpfung zum ausgewählten Mitarbeiter entfernen wollen?", "Verknüpfung löschen?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (mbResult == MessageBoxResult.Yes)
                 {
-                    var result = await _vehicleService.DeleteRelation(_vm.SelectedVehicle, _vm.SelectedEmployeeRelation);
-                    if (result.Status != Status.Deleted)
+                    try
                     {
-                        MessageBox.Show(result.Message, "Fehler beim Löschen", MessageBoxButton.OK, MessageBoxImage.Error);
+                        var result = await _vehicleService.DeleteRelation(_vm.SelectedVehicle, _vm.SelectedEmployeeRelation);
+                        if (result.Status != Status.Deleted)
+                        {
+                            MessageBox.Show(result.Message, "Fehler beim Löschen", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            LoadVehicles();
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        LoadVehicles();
+                        MessageBox.Show(ex.Message, "Fehler beim Löschen", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Fehler beim Löschen", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }, o => _vm.SelectedEmployeeRelation != null);
 

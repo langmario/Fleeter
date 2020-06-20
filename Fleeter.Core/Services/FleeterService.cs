@@ -28,6 +28,15 @@ namespace Fleeter.Core.Services
 
         public BaseResult CreateEmployeeRelation(Vehicle v, VehicleToEmployeeRelation r)
         {
+            if (r.EndDate != null && r.StartDate > r.EndDate)
+            {
+                return new BaseResult
+                {
+                    Status = Status.BadRequest,
+                    Message = "Startdatum muss vor dem Enddatum liegen"
+                };
+            }
+
             try
             {
                 var vehicle = _vehicles.FindById(v.Id);
@@ -37,7 +46,16 @@ namespace Fleeter.Core.Services
                     return new BaseResult
                     {
                         Status = Status.BadRequest,
-                        Message = "Vehicle existiert nicht"
+                        Message = "Fahrzeug existiert nicht"
+                    };
+                }
+
+                if (r.StartDate > vehicle.LeasingTo || r.StartDate < vehicle.LeasingFrom || r.EndDate > vehicle.LeasingTo || r.EndDate < vehicle.LeasingFrom)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.BadRequest,
+                        Message = $"Relationen können nur während des Leasingzeitraumes erstellt werden ({vehicle.LeasingFrom} - {vehicle.LeasingTo})"
                     };
                 }
 
@@ -307,7 +325,7 @@ namespace Fleeter.Core.Services
                     return new BaseResult
                     {
                         Status = Status.BadRequest,
-                        Message = "Vehicle existiert nicht"
+                        Message = "Fahrzeug existiert nicht"
                     };
                 }
 
@@ -343,6 +361,17 @@ namespace Fleeter.Core.Services
         {
             try
             {
+                var vehicle = _vehicles.FindById(v.Id);
+
+                if (vehicle is null)
+                {
+                    return new BaseResult
+                    {
+                        Status = Status.BadRequest,
+                        Message = "Fahrzeug existiert nicht"
+                    };
+                }
+
                 _vehicles.Delete(v);
                 return new BaseResult
                 {
@@ -386,7 +415,7 @@ namespace Fleeter.Core.Services
             return costsPerMonth;
         }
 
-        public Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>> GetCostsPerMonthPerBusinessUnit()
+        public IEnumerable<BusinessUnitCostDetails> GetCostsPerMonthPerBusinessUnit()
         {
             var vehicles = _vehicles.FindAll();
             var employees = _employees.FindAll();
@@ -394,9 +423,26 @@ namespace Fleeter.Core.Services
             var min = vehicles.Min(v => v.LeasingFrom);
             var max = vehicles.Max(v => v.LeasingTo);
 
-            Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>> costsPerMonth = new Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>>();
+            var relations = vehicles.SelectMany(v => v.EmployeeRelations);
 
-            return costsPerMonth;
+            var result = businessUnits
+                .Join(employees, b => b.Id, e => e.BusinessUnit.Id, (b, e) => new { BusinessUnit = b, Employee = e })
+                .Join(relations, be => be.Employee.Id, ve => ve.Employee.Id, (be, ve) => new { BusinessUnitEmployee = be, VehicleEmployee = ve })
+                .Join(vehicles, beve => beve.VehicleEmployee.Vehicle.Id, v => v.Id, (beve, v) => new { beve.BusinessUnitEmployee.BusinessUnit, beve.VehicleEmployee, Vehicle = v })
+                .Select(m => new { m.BusinessUnit, Costs = GetCostsPerVehicle(m.VehicleEmployee, m.Vehicle) })
+                .SelectMany(bv => bv.Costs.Select(c => new { VehicleCost = c, bv.BusinessUnit }))
+                .GroupBy(cb => new { cb.VehicleCost.Month, cb.BusinessUnit })
+                .Select(cb => new BusinessUnitCostDetails { Month = cb.Key.Month, BusinessUnit = cb.Key.BusinessUnit, Costs = cb.Sum(c => c.VehicleCost.Costs) });
+
+            return result;
+        }
+
+        private IEnumerable<(DateTime Month, int Count, decimal Costs)> GetCostsPerVehicle(VehicleToEmployeeRelation vehicleEmployee, Vehicle vehicle)
+        {
+            for (DateTime i = vehicleEmployee.StartDate; i < (vehicleEmployee.EndDate ?? DateTime.Now); i = i.AddMonths(1))
+            {
+                yield return (new DateTime(i.Year, i.Month, 1), 1, vehicle.Insurance / 12 + vehicle.LeasingRate);
+            }
         }
 
         public IEnumerable<Employee> GetEmployees()
@@ -413,6 +459,13 @@ namespace Fleeter.Core.Services
     public class MonthCostDetails
     {
         public int Count { get; set; }
+        public decimal Costs { get; set; }
+    }
+
+    public class BusinessUnitCostDetails
+    {
+        public DateTime Month { get; set; }
+        public BusinessUnit BusinessUnit { get; set; }
         public decimal Costs { get; set; }
     }
 }

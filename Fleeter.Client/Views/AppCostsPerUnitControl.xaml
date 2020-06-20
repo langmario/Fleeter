@@ -27,13 +27,12 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Monat"
                                     Width="2*"
-                                    Binding="{Binding Key, StringFormat=yyyy MMMM}"/>
+                                    Binding="{Binding Month, StringFormat=yyyy MMMM}"/>
                 <DataGridTextColumn Header="Geschäftsbereich"
                                     Width="*"
-                                    Binding="{Binding Value.Key}"/>
-                <DataGridTextColumn Header="# Fahrzeuge"
-                                    Width="0.5*"/>
+                                    Binding="{Binding BusinessUnit.Name}"/>
                 <DataGridTextColumn Header="Kosten"
+                                    Binding="{Binding Costs}"
                                     Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

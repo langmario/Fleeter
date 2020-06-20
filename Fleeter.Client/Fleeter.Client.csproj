@@ -240,6 +240,9 @@
     <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.BusinessUnit.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.BusinessUnitCostDetails.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\FleeterServiceProxy\Fleeter.Client.FleeterServiceProxy.Employee.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

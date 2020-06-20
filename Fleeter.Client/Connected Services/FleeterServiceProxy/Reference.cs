@@ -705,6 +705,83 @@ namespace Fleeter.Client.FleeterServiceProxy {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BusinessUnitCostDetails", Namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services")]
+    [System.SerializableAttribute()]
+    public partial class BusinessUnitCostDetails : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Fleeter.Client.FleeterServiceProxy.BusinessUnit BusinessUnitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal CostsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime MonthField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Fleeter.Client.FleeterServiceProxy.BusinessUnit BusinessUnit {
+            get {
+                return this.BusinessUnitField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BusinessUnitField, value) != true)) {
+                    this.BusinessUnitField = value;
+                    this.RaisePropertyChanged("BusinessUnit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Costs {
+            get {
+                return this.CostsField;
+            }
+            set {
+                if ((this.CostsField.Equals(value) != true)) {
+                    this.CostsField = value;
+                    this.RaisePropertyChanged("Costs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Month {
+            get {
+                return this.MonthField;
+            }
+            set {
+                if ((this.MonthField.Equals(value) != true)) {
+                    this.MonthField = value;
+                    this.RaisePropertyChanged("Month");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FleeterServiceProxy.IFleeterService")]
     public interface IFleeterService {
@@ -782,10 +859,10 @@ namespace Fleeter.Client.FleeterServiceProxy {
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.DateTime, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>> GetCostsPerMonthAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnit", ReplyAction="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnitResponse")]
-        System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>> GetCostsPerMonthPerBusinessUnit();
+        System.Collections.Generic.List<Fleeter.Client.FleeterServiceProxy.BusinessUnitCostDetails> GetCostsPerMonthPerBusinessUnit();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnit", ReplyAction="http://tempuri.org/IFleeterService/GetCostsPerMonthPerBusinessUnitResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>>> GetCostsPerMonthPerBusinessUnitAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Fleeter.Client.FleeterServiceProxy.BusinessUnitCostDetails>> GetCostsPerMonthPerBusinessUnitAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -911,11 +988,11 @@ namespace Fleeter.Client.FleeterServiceProxy {
             return base.Channel.GetCostsPerMonthAsync();
         }
         
-        public System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>> GetCostsPerMonthPerBusinessUnit() {
+        public System.Collections.Generic.List<Fleeter.Client.FleeterServiceProxy.BusinessUnitCostDetails> GetCostsPerMonthPerBusinessUnit() {
             return base.Channel.GetCostsPerMonthPerBusinessUnit();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<System.DateTime, System.Collections.Generic.Dictionary<Fleeter.Client.FleeterServiceProxy.BusinessUnit, Fleeter.Client.FleeterServiceProxy.MonthCostDetails>>> GetCostsPerMonthPerBusinessUnitAsync() {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Fleeter.Client.FleeterServiceProxy.BusinessUnitCostDetails>> GetCostsPerMonthPerBusinessUnitAsync() {
             return base.Channel.GetCostsPerMonthPerBusinessUnitAsync();
         }
     }

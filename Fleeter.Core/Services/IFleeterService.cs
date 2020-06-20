@@ -54,6 +54,6 @@ namespace Fleeter.Core.Services
         Dictionary<DateTime, MonthCostDetails> GetCostsPerMonth();
 
         [OperationContract]
-        Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>> GetCostsPerMonthPerBusinessUnit();
+        IEnumerable<BusinessUnitCostDetails> GetCostsPerMonthPerBusinessUnit();
     }
 }

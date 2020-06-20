@@ -8,6 +8,6 @@ namespace Fleeter.Client.Services
     public interface ICalculationService
     {
         Task<Dictionary<DateTime, MonthCostDetails>> GetCostsPerMonth();
-        Task<Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>>> GetCostsPerMonthPerBusinessUnit();
+        Task<List<BusinessUnitCostDetails>> GetCostsPerMonthPerBusinessUnit();
     }
 }

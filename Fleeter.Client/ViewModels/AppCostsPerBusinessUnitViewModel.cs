@@ -10,8 +10,8 @@ namespace Fleeter.Client.ViewModels
 {
     public class AppCostsPerBusinessUnitViewModel : ViewModelBase
     {
-        private Dictionary<(DateTime date, BusinessUnit bu), MonthCostDetails> _costs;
-        public Dictionary<(DateTime date, BusinessUnit bu), MonthCostDetails> Costs
+        private IEnumerable<BusinessUnitCostDetails> _costs;
+        public IEnumerable<BusinessUnitCostDetails> Costs
         {
             get => _costs;
             set => Set(ref _costs, value);

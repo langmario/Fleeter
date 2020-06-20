@@ -15,9 +15,9 @@ namespace Fleeter.Client.Services
             return fleeter.GetCostsPerMonthAsync();
         }
 
-        public Task<Dictionary<DateTime, Dictionary<BusinessUnit, MonthCostDetails>>> GetCostsPerMonthPerBusinessUnit()
+        public Task<List<BusinessUnitCostDetails>> GetCostsPerMonthPerBusinessUnit()
         {
-            var fleeter = new FleeterServiceClient(new WSHttpBinding { MaxReceivedMessageSize = 20000000 }, new EndpointAddress("http://localhost:8080/fleeter"));
+            var fleeter = new FleeterServiceClient();
             fleeter.Open();
             return fleeter.GetCostsPerMonthPerBusinessUnitAsync();
         }

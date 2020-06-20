@@ -1,7 +1,9 @@
-﻿using Fleeter.Client.Framework;
+﻿using Fleeter.Client.FleeterServiceProxy;
+using Fleeter.Client.Framework;
 using Fleeter.Client.Services;
 using Fleeter.Client.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -21,21 +23,23 @@ namespace Fleeter.Client.Controllers
         {
             _vm = new AppCostsPerMonthViewModel();
 
-            SetCosts();
+            var costs = await GetCosts();
+            _vm.Costs = costs;
 
             return _vm;
         }
 
-        private async void SetCosts()
+        private async Task<Dictionary<DateTime, MonthCostDetails>> GetCosts()
         {
             try
             {
                 var costs = await _calcService.GetCostsPerMonth();
-                _vm.Costs = costs;
+                return costs;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Fehler beim Abrufen" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return new Dictionary<DateTime, MonthCostDetails>();
             }
         }
     }

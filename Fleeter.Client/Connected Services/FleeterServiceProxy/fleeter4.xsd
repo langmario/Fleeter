@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" />
   <xs:complexType name="MonthCostDetails">
     <xs:sequence>
       <xs:element minOccurs="0" name="Costs" type="xs:decimal" />
@@ -7,4 +8,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MonthCostDetails" nillable="true" type="tns:MonthCostDetails" />
+  <xs:complexType name="ArrayOfBusinessUnitCostDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinessUnitCostDetails" nillable="true" type="tns:BusinessUnitCostDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBusinessUnitCostDetails" nillable="true" type="tns:ArrayOfBusinessUnitCostDetails" />
+  <xs:complexType name="BusinessUnitCostDetails">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" minOccurs="0" name="BusinessUnit" nillable="true" type="q1:BusinessUnit" />
+      <xs:element minOccurs="0" name="Costs" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Month" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BusinessUnitCostDetails" nillable="true" type="tns:BusinessUnitCostDetails" />
 </xs:schema>

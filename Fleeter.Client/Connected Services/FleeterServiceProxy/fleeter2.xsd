@@ -3,6 +3,7 @@
   <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Models" />
   <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services.Results" />
   <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:8080/fleeter?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services" />
   <xs:element name="GetBusinessUnits">
     <xs:complexType>
       <xs:sequence />
@@ -173,7 +174,7 @@
   <xs:element name="GetCostsPerMonthPerBusinessUnitResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetCostsPerMonthPerBusinessUnitResult" nillable="true" type="q23:ArrayOfKeyValueOfdateTimeArrayOfKeyValueOfBusinessUnitMonthCostDetailsYgL_Pqi1Cty7Ep6D1" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Fleeter.Core.Services" minOccurs="0" name="GetCostsPerMonthPerBusinessUnitResult" nillable="true" type="q23:ArrayOfBusinessUnitCostDetails" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

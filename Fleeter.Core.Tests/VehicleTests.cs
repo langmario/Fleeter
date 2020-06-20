@@ -47,6 +47,12 @@ namespace Fleeter.Core.Tests
             LeasingTo = DateTime.Now,
             LeasingRate = 100,
         };
+        private static readonly Vehicle _notExistingVehicle = new Vehicle
+        {
+            Id = 99,
+            Brand = "Porsche",
+            Model = "911",
+        };
 
         private static readonly VehicleToEmployeeRelation _relation = new VehicleToEmployeeRelation
         {
@@ -104,6 +110,15 @@ namespace Fleeter.Core.Tests
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Deleted, result.Status);
+        }
+
+        [TestMethod]
+        public void TestDeletingVehicleWhichDoesNotExist()
+        {
+            var result = _service.DeleteVehicle(_notExistingVehicle);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.BadRequest, result.Status);
         }
 
         [TestMethod]

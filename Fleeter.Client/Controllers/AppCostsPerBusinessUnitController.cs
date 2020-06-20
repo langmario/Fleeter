@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Fleeter.Client.Controllers
 {
@@ -23,7 +24,24 @@ namespace Fleeter.Client.Controllers
         {
             _vm = new AppCostsPerBusinessUnitViewModel();
 
+            var costs = await GetCosts();
+            _vm.Costs = costs;
+
             return _vm;
+        }
+
+        private async Task<IEnumerable<BusinessUnitCostDetails>> GetCosts()
+        {
+            try
+            {
+                var costs = await _calcService.GetCostsPerMonthPerBusinessUnit();
+                return costs;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Abrufen" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return Enumerable.Empty<BusinessUnitCostDetails>();
+            }
         }
     }
 }
