@@ -62,7 +62,7 @@ namespace Fleeter.Core.Tests
         }
 
         [TestMethod]
-        public void TestGettingBusinessUnitById()
+        public void TestDeletingValidBusinessUnit()
         {
             var result = _service.DeleteBusinessUnit(_buMarketing);
 

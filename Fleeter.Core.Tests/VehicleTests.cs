@@ -21,7 +21,9 @@ namespace Fleeter.Core.Tests
             LicensePlate = "ABC-ABC-1000",
             Brand = "Porsche",
             Model = "911",
-            Version = 1
+            Version = 1,
+            LeasingFrom = new DateTime(2020, 1, 1),
+            LeasingTo = new DateTime(2020, 12, 31)
         };
         private static readonly Vehicle _vehicle2 = new Vehicle
         {
@@ -68,7 +70,7 @@ namespace Fleeter.Core.Tests
                 Lastname = "Doe",
                 EmployeeNumber = 1
             },
-            StartDate = DateTime.Today
+            StartDate = new DateTime(2020, 4, 6)
         };
 
         [ClassInitialize]

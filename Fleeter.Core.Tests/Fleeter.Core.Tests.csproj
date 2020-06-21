@@ -68,6 +68,7 @@
     <Compile Include="BusinessUnitTests.cs" />
     <Compile Include="EmployeeTests.cs" />
     <Compile Include="CostsPerMonthTests.cs" />
+    <Compile Include="CostsPerBusinessUnitTests.cs" />
     <Compile Include="VehicleTests.cs" />
     <Compile Include="UserTests.cs" />
   </ItemGroup>
