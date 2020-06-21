@@ -32,8 +32,14 @@
                                     Width="*"
                                     Binding="{Binding BusinessUnit.Name}"/>
                 <DataGridTextColumn Header="Kosten"
-                                    Binding="{Binding Costs}"
-                                    Width="*"/>
+                                    Binding="{Binding Costs, StringFormat={}{0:#,#.00}}"
+                                    Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

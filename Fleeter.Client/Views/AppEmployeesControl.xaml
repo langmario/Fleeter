@@ -9,10 +9,6 @@
     <UserControl.Resources>
         <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
         <helper:NullToVisibleConverter x:Key="NullToVisible"/>
-        <Style TargetType="Button">
-            <Setter Property="Padding" Value="10 5"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -41,7 +37,7 @@
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="30"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="50"/>
                 <DataGridTextColumn Header="Personal-Nr." Binding="{Binding EmployeeNumber}" Width="100"/>
                 <DataGridTextColumn Header="Anrede" Binding="{Binding Salutation}" Width="0.5*"/>
                 <DataGridTextColumn Header="Titel" Binding="{Binding Title}" Width="0.5*"/>

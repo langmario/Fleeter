@@ -4,17 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Verknüpfung hinzufügen" Height="500" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Style x:Key="Spacing" TargetType="{x:Type Control}">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="10 5"/>
-        </Style>
-    </Window.Resources>
+        Title="Verknüpfung hinzufügen"
+        MinWidth="400"
+        MinHeight="400"
+        Height="500"
+        Width="500"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -23,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <DataGrid Grid.Row="0"
-                  Grid.ColumnSpan="2"
+                  Grid.ColumnSpan="4"
                   ItemsSource="{Binding Employees}"
                   SelectedItem="{Binding SelectedEmployee}"
                   SelectionMode="Single"
@@ -46,7 +48,7 @@
             </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id"
-                                    Width="30"
+                                    MinWidth="50"
                                     Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Vorname"
                                     Width="*"
@@ -60,22 +62,18 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Column="0" Grid.Row="1">
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="5">
             <Label>Von</Label>
-            <DatePicker SelectedDate="{Binding From}"
-                        Style="{StaticResource Spacing}"/>
+            <DatePicker SelectedDate="{Binding From}"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="1">
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin="5">
             <Label>Bis</Label>
-            <DatePicker SelectedDate="{Binding To}"
-                        Style="{StaticResource Spacing}"/>
+            <DatePicker SelectedDate="{Binding To}"/>
         </StackPanel>
 
-        <Button Grid.Row="2"
-                Command="{Binding Add}"
-                Style="{StaticResource Spacing}">Hinzufügen</Button>
-        <Button Grid.Row="2" Grid.Column="1"
-                Command="{Binding Cancel}"
-                Style="{StaticResource Spacing}">Abbrechen</Button>
+        <Button Grid.Column="1" Grid.Row="2"
+                Command="{Binding Add}">Hinzufügen</Button>
+        <Button Grid.Column="2" Grid.Row="2"
+                Command="{Binding Cancel}">Abbrechen</Button>
     </Grid>
 </Window>

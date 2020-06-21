@@ -35,14 +35,14 @@ namespace Fleeter.Client.Controllers
                     else
                     {
                         _vm.SelectedBusinessUnit = null;
-                        LoadBusinessUnits();
+                        _vm.BusinessUnits = await GetBusinessUnit();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Fehler beim Speichern", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            });
+            }, o => _vm.Name != null);
 
             _vm.Delete = new RelayCommand(async o =>
             {
@@ -56,7 +56,7 @@ namespace Fleeter.Client.Controllers
                     else
                     {
                         _vm.SelectedBusinessUnit = null;
-                        LoadBusinessUnits();
+                        _vm.BusinessUnits = await GetBusinessUnit();
                     }
                 }
                 catch (Exception ex)
@@ -75,21 +75,23 @@ namespace Fleeter.Client.Controllers
                 _vm.SelectedBusinessUnit = null;
             });
 
-            LoadBusinessUnits();
+            _vm.BusinessUnits = await GetBusinessUnit();
 
             return _vm;
         }
 
-        private async void LoadBusinessUnits()
+
+        private async Task<ObservableCollection<BusinessUnit>> GetBusinessUnit()
         {
             try
             {
                 var businessUnits = await _businessUnits.GetAll();
-                _vm.BusinessUnits = new ObservableCollection<BusinessUnit>(businessUnits);
+                return new ObservableCollection<BusinessUnit>(businessUnits);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Fehler beim Abrufen der Geschäftsbereiche" + Environment.NewLine + ex.Message, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                return new ObservableCollection<BusinessUnit>();
             }
         }
     }

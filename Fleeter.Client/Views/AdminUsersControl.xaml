@@ -8,10 +8,6 @@
     <UserControl.Resources>
         <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
         <helper:NullToVisibleConverter x:Key="NullToVisible"/>
-        <Style TargetType="Button">
-            <Setter Property="Padding" Value="10 5"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -40,7 +36,7 @@
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="30"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="50"/>
                 <DataGridTextColumn Header="Benutzername" Binding="{Binding Username}" Width="*"/>
                 <DataGridTextColumn Header="Vorname" Binding="{Binding Firstname}" Width="*"/>
                 <DataGridTextColumn Header="Nachname" Binding="{Binding Lastname}" Width="*"/>
@@ -69,19 +65,19 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Margin="5">
-                <Label HorizontalAlignment="Center">Vorname</Label>
+                <Label>Vorname</Label>
                 <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="5">
-                <Label HorizontalAlignment="Center">Nachname</Label>
+                <Label>Nachname</Label>
                 <TextBox Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Margin="5">
-                <Label HorizontalAlignment="Center">Username</Label>
+                <Label>Username</Label>
                 <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Grid.Column="3" Margin="5">
-                <Label HorizontalAlignment="Center">Ist Admin</Label>
+                <Label>Ist Admin</Label>
                 <CheckBox IsChecked="{Binding IsAdmin}" HorizontalAlignment="Center"/>
             </StackPanel>
 

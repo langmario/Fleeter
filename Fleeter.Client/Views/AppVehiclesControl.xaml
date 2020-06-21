@@ -10,10 +10,6 @@
         <helper:NullToCollapsedConverter x:Key="NullToCollapsed"/>
         <helper:NullToVisibleConverter x:Key="NullToVisible"/>
         <helper:IntToBooleanConverter x:Key="IntToBool"/>
-        <Style TargetType="Button">
-            <Setter Property="Padding" Value="10 5"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -42,7 +38,7 @@
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="30"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" MinWidth="50"/>
                 <DataGridTextColumn Header="Kennzeichen" Binding="{Binding LicensePlate}" MinWidth="100"/>
                 <DataGridTextColumn Header="Marke" Binding="{Binding Brand}" Width="*"/>
                 <DataGridTextColumn Header="Modell" Binding="{Binding Model}" Width="*"/>
@@ -91,7 +87,7 @@
                         <TextBox Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
-                    <GroupBox Grid.Row="2" Grid.ColumnSpan="2" Header="Leasing">
+                    <GroupBox Margin="10 20 10 0" Grid.Row="2" Grid.ColumnSpan="2" Header="Leasing">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -110,7 +106,7 @@
                             </StackPanel>
                             <StackPanel Grid.Column="2" Margin="5">
                                 <Label HorizontalAlignment="Center">Leasing-Rate</Label>
-                                <TextBox Text="{Binding LeasingRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Text="{Binding LeasingRate, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput"/>
                             </StackPanel>
                         </Grid>
                     </GroupBox>

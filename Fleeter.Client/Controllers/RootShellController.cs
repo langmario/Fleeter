@@ -33,7 +33,6 @@ namespace Fleeter.Client.Controller
         private void ShowLogin()
         {
             loginVM.Login = new RelayCommand(LoginExecute, o => !string.IsNullOrEmpty(loginVM.Username) && !string.IsNullOrEmpty(loginVM.Password) && !loginVM.IsLoading);
-            loginVM.Username = "admin";
 
             rootVM.ActiveViewModel = loginVM;
 

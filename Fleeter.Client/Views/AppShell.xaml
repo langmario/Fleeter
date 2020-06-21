@@ -7,14 +7,22 @@
              xmlns:views="clr-namespace:Fleeter.Client.Views"
              xmlns:helper="clr-namespace:Fleeter.Client.Converter"
              mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="White">
     <UserControl.Resources>
-        <Style TargetType="Button" x:Key="MenuItem">
-            <Setter Property="Margin" Value="20 7" />
-            <Setter Property="Padding" Value="15" />
-            <Setter Property="FontSize" Value="14" />
-        </Style>
         <helper:BooleanToCollapsedConverter x:Key="BoolToVis"/>
+        <Style x:Key="MenuItem" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="10 5"/>
+        </Style>
+        <Style x:Key="MenuItemAccent" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="10 5"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,13 +34,13 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="#eee">
-            <TextBlock VerticalAlignment="Center"
+        <Grid Background="#EEE">
+            <Label VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontWeight="Black"
                        FontSize="30">
                 Fleeter Inc.
-            </TextBlock>
+            </Label>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
@@ -63,8 +71,7 @@
                         Style="{StaticResource MenuItem}">Benutzer</Button>
 
                 <Button Command="{Binding Logout}"
-                        Background="#bbb"
-                        Style="{StaticResource MenuItem}">Logout</Button>
+                        Style="{StaticResource MenuItemAccent}">Logout</Button>
             </StackPanel>
         </ScrollViewer>
 

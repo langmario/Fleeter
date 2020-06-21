@@ -11,15 +11,14 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontSize="20">
+        <Label VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               FontSize="24">
                 Willkommen bei Fleeter, ihrem #1 Flottenmanagement
-        </TextBlock>
+        </Label>
         <Button Grid.Row="1"
                 Command="{Binding ChangePassword}"
-                HorizontalAlignment="Center"
-                Padding="10">
+                HorizontalAlignment="Center">
             Passwort ändern
         </Button>
     </Grid>
